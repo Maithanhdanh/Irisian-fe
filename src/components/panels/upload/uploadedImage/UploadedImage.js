@@ -1,0 +1,139 @@
+import React, { useEffect, useState } from "react"
+import PropTypes from "prop-types"
+import { useStateValue } from "../../../context/StateProvider"
+import axiosML from "../../../../config/axiosML"
+import ROUTE_MAP from "../../../../config/urlBase"
+import handlePredictImage from "../../../../helpers/predictImage"
+
+UploadedImage.propTypes = {
+	file: PropTypes.object,
+}
+UploadedImage.defaultProps = {
+	file: {},
+}
+
+function UploadedImage() {
+	const [{ currImage }, dispatch] = useStateValue()
+	const [brightness, setBrightness] = useState(0)
+	const [contrast, setContrast] = useState(0)
+	const [grayscale, setGrayscale] = useState(0)
+	const [saturate, setSaturate] = useState(0)
+	const [invert, setInvert] = useState(0)
+
+	const clearFilter = () => {
+		setBrightness(0)
+		setContrast(0)
+		setGrayscale(0)
+		setSaturate(0)
+		setInvert(0)
+	}
+
+	const handleClear = () => {
+		dispatch({ type: "REMOVE_CURRENT_IMAGE" })
+	}
+	const handlePrediction = async () => {
+		handlePredictImage(currImage.file, dispatch)
+	}
+	
+	return (
+		<div className="thumbsContainer">
+			<div className="process__buttons">
+				<div className="process__buttons__group" onClick={clearFilter}>
+					<div className="process__buttons__group__control">
+						<i class="trash alternate icon"></i>
+					</div>
+				</div>
+				<div className="process__buttons__group">
+					<span>Brightness</span>
+					<div className="process__buttons__group__control">
+						<i
+							className="plus circle icon"
+							onClick={() => setBrightness(brightness + 1)}
+						></i>
+						{brightness}
+						<i
+							className="minus circle icon"
+							onClick={() => setBrightness(brightness - 1)}
+						></i>
+					</div>
+				</div>
+				<div className="process__buttons__group">
+					<span>Contrast</span>
+					<div className="process__buttons__group__control">
+						<i
+							className="plus circle icon"
+							onClick={() => setContrast(contrast + 1)}
+						></i>
+						{contrast}
+						<i
+							className="minus circle icon"
+							onClick={() => setContrast(contrast - 1)}
+						></i>
+					</div>
+				</div>
+				<div className="process__buttons__group">
+					<span>Grayscale</span>
+					<div className="process__buttons__group__control">
+						<i
+							className="plus circle icon"
+							onClick={() => setGrayscale(grayscale + 1)}
+						></i>
+						{grayscale}
+						<i
+							className="minus circle icon"
+							onClick={() => setGrayscale(grayscale - 1)}
+						></i>
+					</div>
+				</div>
+				<div className="process__buttons__group">
+					<span>Saturate</span>
+					<div className="process__buttons__group__control">
+						<i
+							className="plus circle icon"
+							onClick={() => setSaturate(saturate + 1)}
+						></i>
+						{saturate}
+						<i
+							className="minus circle icon"
+							onClick={() => setSaturate(saturate - 1)}
+						></i>
+					</div>
+				</div>
+				<div className="process__buttons__group">
+					<span>Invert</span>
+					<div className="process__buttons__group__control">
+						<i
+							className="plus circle icon"
+							onClick={() => setInvert(invert + 1)}
+						></i>
+						{invert}
+						<i
+							className="minus circle icon"
+							onClick={() => setInvert(invert - 1)}
+						></i>
+					</div>
+				</div>
+				<div className="process__buttons__group" onClick={clearFilter}>
+					<div className="process__buttons__group__control">
+						<i class="trash alternate icon"></i>
+					</div>
+				</div>
+			</div>
+			<div className="thumb" key={currImage.file.name}>
+				<div className="thumbInner">
+					<img src={currImage.file.preview} alt="preview" />
+				</div>
+			</div>
+			<div className="nav__buttons">
+				<button className="ui negative button" onClick={handleClear}>
+					Discard
+				</button>
+				<button className="ui primary button" onClick={handlePrediction}>
+					Submit
+				</button>
+			</div>
+		</div>
+	)
+}
+
+export default UploadedImage

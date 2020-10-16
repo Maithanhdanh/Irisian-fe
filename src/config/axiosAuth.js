@@ -1,5 +1,6 @@
 import axios from "axios"
 import queryString from "query-string"
+import ROUTE_MAP from "./urlBase"
 if (process.env.NODE_ENV !== "production") {
 	require("dotenv").config()
 }
@@ -14,8 +15,8 @@ const getAccessToken = () => {
 		try {
 			const expiredToken = setTimeout(async () => {
 				const getAccessToken = axiosAuth({
-					method: "GET",
-					url: "/auth/token",
+					method: ROUTE_MAP.USER.TOKEN.METHOD,
+					url: ROUTE_MAP.USER.TOKEN.PATH,
 				})
 				const getAccessTokenData = await getAccessToken
 				if (getAccessTokenData.error) return null

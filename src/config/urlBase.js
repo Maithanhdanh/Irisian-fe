@@ -1,23 +1,35 @@
-const URL_BASE ={
-    USER: '/auth',
+const URL_BASE = {
+	USER: "/auth",
+	IMAGE: "/image",
+}
+
+const ROUTES_IMAGE = {
+	UPLOAD: "/upload",
+    INFO: "/info",
+    FINDING:"/findings"
 }
 
 const ROUTES_USER = {
-    LOGIN: '/login',
-    LOGOUT: '/logout',
-    TOKEN: '/token',
-    IS_LOGIN: '',
-    REGISTER: '/register',
+	LOGIN: "/login",
+	LOGOUT: "/logout",
+	TOKEN: "/token",
+	IS_LOGIN: "",
+	REGISTER: "/register",
 }
 
 const ROUTE_MAP = {
-    USER:{
-        LOGIN: URL_BASE.USER + ROUTES_USER.LOGIN,
-        LOGOUT: URL_BASE.USER + ROUTES_USER.LOGOUT,
-        TOKEN: URL_BASE.USER + ROUTES_USER.TOKEN,
-        IS_LOGIN: URL_BASE.USER + ROUTES_USER.IS_LOGIN,
-        REGISTER: URL_BASE.USER + ROUTES_USER.REGISTER,
+	USER: {
+		LOGIN: { PATH: URL_BASE.USER + ROUTES_USER.LOGIN, METHOD: "POST" },
+		LOGOUT: { PATH: URL_BASE.USER + ROUTES_USER.LOGOUT, METHOD: "GET" },
+		TOKEN: { PATH: URL_BASE.USER + ROUTES_USER.TOKEN, METHOD: "GET" },
+		IS_LOGIN: { PATH: URL_BASE.USER + ROUTES_USER.IS_LOGIN, METHOD: "GET" },
+		REGISTER: { PATH: URL_BASE.USER + ROUTES_USER.REGISTER, METHOD: "POST" },
     },
+    IMAGE: {
+		UPLOAD: { PATH: URL_BASE.IMAGE + ROUTES_IMAGE.UPLOAD, METHOD: "POST" },
+		INFO: { PATH: URL_BASE.IMAGE + ROUTES_IMAGE.INFO, METHOD: "GET" },
+		FINDING: { PATH: URL_BASE.IMAGE + ROUTES_IMAGE.FINDING, METHOD: "GET" },
+	},
 }
 
 export default ROUTE_MAP

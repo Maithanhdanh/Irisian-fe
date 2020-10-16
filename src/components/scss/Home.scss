@@ -1,0 +1,26 @@
+@import "./Config.scss";
+
+.home {
+	display: flex;
+    flex-direction: row;
+
+	.navbar {
+		// width: 4vw;
+		padding: 7px;
+		display: flex;
+		grid-column: 1;
+		flex-direction: column;
+		flex-grow: 1;
+        background-color: $navbar_color;
+        flex: 0 1 4vw;
+    }
+    .right-panel{
+        background-color: $rightPanel-color;
+        flex: 0 1 65%;
+    }
+    
+    .left-panel{
+        flex: 1 1 auto;
+        background-color: $leftPanel-color;
+    }
+}

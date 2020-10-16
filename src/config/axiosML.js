@@ -27,19 +27,18 @@ const getAccessToken = () => {
 	return accessToken
 }
 
-const axiosClient = axios.create({
-	baseURL: process.env.REACT_APP_API_URL_DEV,
+const axiosML = axios.create({
+	baseURL: process.env.REACT_APP_API_URL_UPLOAD_IMAGE,
 	headers: {
 		"content-type": "application/json",
 		"Access-Control-Allow-Origin": "*",
 		"Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
 		"Access-Control-Allow-Credentials": true,
 	},
-	withCredentials: "include",
 	paramsSerializer: (params) => queryString.stringify(params),
 })
 
-axiosClient.interceptors.request.use(async (config) => {
+axiosML.interceptors.request.use(async (config) => {
 	const token = await getAccessToken()
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`
@@ -48,7 +47,7 @@ axiosClient.interceptors.request.use(async (config) => {
 	return config
 })
 
-axiosClient.interceptors.response.use(
+axiosML.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {
 			return response.data
@@ -62,4 +61,4 @@ axiosClient.interceptors.response.use(
 	}
 )
 
-export default axiosClient
+export default axiosML
