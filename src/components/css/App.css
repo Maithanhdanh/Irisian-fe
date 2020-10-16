@@ -1,0 +1,12 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+  background: #085078;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #85d8ce, #085078);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #85d8ce, #085078);
+  display: grid;
+}
+
+/*# sourceMappingURL=App.css.map */
