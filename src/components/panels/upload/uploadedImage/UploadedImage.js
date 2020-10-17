@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { useStateValue } from "../../../context/StateProvider"
-import axiosML from "../../../../config/axiosML"
-import ROUTE_MAP from "../../../../config/urlBase"
 import handlePredictImage from "../../../../helpers/predictImage"
+import { NAVIGATE_DOMAIN } from "../../../../config/vars"
 
 UploadedImage.propTypes = {
 	file: PropTypes.object,
@@ -13,7 +12,7 @@ UploadedImage.defaultProps = {
 }
 
 function UploadedImage() {
-	const [{ currImage }, dispatch] = useStateValue()
+	const [{ uploadedImage }, dispatch] = useStateValue()
 	const [brightness, setBrightness] = useState(0)
 	const [contrast, setContrast] = useState(0)
 	const [grayscale, setGrayscale] = useState(0)
@@ -32,7 +31,7 @@ function UploadedImage() {
 		dispatch({ type: "REMOVE_CURRENT_IMAGE" })
 	}
 	const handlePrediction = async () => {
-		handlePredictImage(currImage.file, dispatch)
+		handlePredictImage(uploadedImage.image, dispatch)
 	}
 	
 	return (
@@ -40,7 +39,7 @@ function UploadedImage() {
 			<div className="process__buttons">
 				<div className="process__buttons__group" onClick={clearFilter}>
 					<div className="process__buttons__group__control">
-						<i class="trash alternate icon"></i>
+						<i className="trash alternate icon"></i>
 					</div>
 				</div>
 				<div className="process__buttons__group">
@@ -115,13 +114,13 @@ function UploadedImage() {
 				</div>
 				<div className="process__buttons__group" onClick={clearFilter}>
 					<div className="process__buttons__group__control">
-						<i class="trash alternate icon"></i>
+						<i className="trash alternate icon"></i>
 					</div>
 				</div>
 			</div>
-			<div className="thumb" key={currImage.file.name}>
+			<div className="thumb" key={uploadedImage.no_background}>
 				<div className="thumbInner">
-					<img src={currImage.file.preview} alt="preview" />
+					<img src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/${uploadedImage.no_background}`} alt="preview" />
 				</div>
 			</div>
 			<div className="nav__buttons">

@@ -2,7 +2,7 @@ import axios from "axios"
 import queryString from "query-string"
 import axiosAuth from "../config/axiosAuth"
 import ROUTE_MAP from "./urlBase"
-require("dotenv").config()
+import {NAVIGATE_DOMAIN} from "./vars"
 
 const getAccessToken = () => {
 	const accessToken = localStorage.getItem("access_token")
@@ -28,7 +28,7 @@ const getAccessToken = () => {
 }
 
 const axiosClient = axios.create({
-	baseURL: process.env.REACT_APP_API_URL_DEV,
+	baseURL: NAVIGATE_DOMAIN.IRISIAN,
 	headers: {
 		"content-type": "application/json",
 		"Access-Control-Allow-Origin": "*",

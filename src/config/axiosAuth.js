@@ -1,9 +1,7 @@
 import axios from "axios"
 import queryString from "query-string"
 import ROUTE_MAP from "./urlBase"
-if (process.env.NODE_ENV !== "production") {
-	require("dotenv").config()
-}
+import {NAVIGATE_DOMAIN} from "./vars"
 
 const getAccessToken = () => {
 	const refreshToken = localStorage.getItem("refresh_token")
@@ -35,7 +33,7 @@ const getAccessToken = () => {
 }
 
 const axiosAuth = axios.create({
-	baseURL: process.env.REACT_APP_API_URL_AUTHENTICATE,
+	baseURL: NAVIGATE_DOMAIN.AUTHENTICATION,
 	headers: {
 		"content-type": "application/json",
 		"Access-Control-Allow-Origin": "*",

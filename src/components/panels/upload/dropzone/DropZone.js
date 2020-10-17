@@ -1,12 +1,13 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { Icon } from "semantic-ui-react"
+import { UploadImage } from "../../../../helpers/predictImage"
 import { useStateValue } from "../../../context/StateProvider"
 
 function DropZone() {
-	const [{}, dispatch] = useStateValue()
+	const [{},dispatch] = useStateValue()
 	const onDrop = useCallback((acceptedFiles) => {
-		acceptedFiles.forEach((file) => {
+		acceptedFiles.forEach( async(file) => {
 
 			const reader = new FileReader()
 
@@ -14,13 +15,19 @@ function DropZone() {
 			reader.onerror = () => console.log("file reading has failed")
 			reader.onload = () => {
 				// Do whatever you want with the file contents
-				const binaryStr = reader.result
+				// const binaryStr = reader.result
 			}
 			reader.readAsArrayBuffer(file)
 			const uploadedFile = Object.assign(file, {
                 preview: URL.createObjectURL(file),
-            })
-				
+			})
+			
+			const responseImage = await UploadImage(file)
+			dispatch({
+				type: "SET_UPLOADED_IMAGE",
+				uploadedImage: responseImage,
+			})
+
 			dispatch({
 				type: "SET_CURRENT_IMAGE",
 				currImage: {
@@ -31,7 +38,7 @@ function DropZone() {
 			})
 			
 		})
-	}, [])
+	})
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
 		onDrop,

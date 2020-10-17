@@ -25,7 +25,7 @@ Login.defaultProps = {
 
 function Login({ type, initialState }) {
 	const history = useHistory()
-	const [{},dispatch] = useStateValue()
+	const [{}, dispatch] = useStateValue()
 	const [formData, setFormData] = useState(initialState)
 
 	const handleOnChange = (e) => {
@@ -47,7 +47,7 @@ function Login({ type, initialState }) {
 			})
 			return history.push("/")
 		}
-	},[])
+	})
 
 	const handleOnSubmit = async (e) => {
 		try {
@@ -55,13 +55,13 @@ function Login({ type, initialState }) {
 			const token =
 				type === "register"
 					? await axiosAuth({
-							method: "POST",
-							url: ROUTE_MAP.USER.REGISTER,
+							method: ROUTE_MAP.USER.REGISTER.METHOD,
+							url: ROUTE_MAP.USER.REGISTER.PATH,
 							data: formData,
 					  })
 					: await axiosAuth({
-							method: "POST",
-							url: ROUTE_MAP.USER.LOGIN,
+							method: ROUTE_MAP.USER.LOGIN.METHOD,
+							url: ROUTE_MAP.USER.LOGIN.PATH,
 							data: formData,
 					  })
 
@@ -79,7 +79,6 @@ function Login({ type, initialState }) {
 			history.push("/")
 			return
 		} catch (e) {
-			console.log(e)
 			alert(e)
 		}
 	}

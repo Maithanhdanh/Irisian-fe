@@ -6,6 +6,10 @@
 }
 .left-panel .file-info {
   text-align: center;
+  align-items: center;
+}
+.left-panel .file-info h4 {
+  margin: 0;
 }
 .left-panel .file-info::after {
   display: inline-block;
@@ -16,8 +20,38 @@
   background: #CACBCD;
 }
 .left-panel .results {
+  display: flex;
+  flex-direction: column;
   margin-top: 1em;
   text-align: center;
+}
+.left-panel .results__info {
+  display: flex;
+  height: 26px;
+  padding: 0 1em;
+  gap: 1em;
+  margin-bottom: 2em;
+}
+.left-panel .results__graph {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-height: 100%;
+  gap: 1em;
+}
+.left-panel .results__graph__process__title {
+  display: flex;
+  justify-content: space-between;
+}
+.left-panel .results__graph__process__bar {
+  width: 100%;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.left-panel .results__graph__process__bar__inner {
+  height: 100%;
+  border-radius: 10px;
 }
 
 /*# sourceMappingURL=LeftPanel.css.map */

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useStateValue } from "../../context/StateProvider"
 import "../../css/RightPanel.css"
 import DropZone from "./dropzone/DropZone"
@@ -6,11 +6,11 @@ import UploadedImage from "./uploadedImage/UploadedImage"
 
 function RightPanel() {
 	// const [file, setFile] = useState([])
-	const [{ currImage }, dispatch] = useStateValue()
+	const [{ uploadedImage }] = useStateValue()
 
 	return (
 		<div className="right-panel">
-			{currImage.name === "" ? (
+			{uploadedImage.no_background === "" ? (
 				<DropZone />
 			) : (
 				<UploadedImage />

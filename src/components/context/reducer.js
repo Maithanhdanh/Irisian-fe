@@ -11,7 +11,9 @@ export const initialState = {
 		no_background: "",
 	},
 	imageInfo: {},
+	needShowInfo: null,
 	imageFindings: {},
+	needShowFindings: null,
 }
 
 const reducer = (state, action) => {
@@ -38,12 +40,14 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				imageInfo: action.imageInfo,
+				needShowInfo: action.needShowInfo,
 			}
 
 		case "SET_FINDING_IMAGE":
 			return {
 				...state,
 				imageFindings: action.imageFindings,
+				needShowFindings: action.needShowFindings,
 			}
 
 		case "SET_PREDICTED_RESULT":
@@ -52,21 +56,36 @@ const reducer = (state, action) => {
 				predictedResult: action.predictedResult,
 			}
 
-		case "REMOVE_CURRENT_IMAGE":
-			return {
-				...state,
-				currImage: {
-					name: "",
-					path: "",
-					file: null,
-				},
-			}
 		case "SET_IMAGE_LIST":
 			return {
 				...state,
 				imageList: action.imageList,
 			}
 
+		case "REMOVE_CURRENT_IMAGE":
+			return {
+				...state,
+				imageList: [],
+				currImage: {
+					name: "",
+					path: "",
+					file: null,
+				},
+				uploadedImage: {
+					image: "",
+					no_background: "",
+				},
+				imageInfo: {},
+				needShowInfo: null,
+				imageFindings: {},
+				needShowFindings: null,
+			}
+
+		case "LOGOUT":
+			return {
+				...initialState,
+			}
+			
 		default:
 			return state
 	}

@@ -9,7 +9,7 @@ import RightPanel from "../panels/upload/RightPanel"
 
 function Home() {
     const history = useHistory()
-    const [{user}, dispatch] = useStateValue()
+    const [{},dispatch] = useStateValue()
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function Home() {
         }
         
         getNewAccessToken()
-    },[])
+    })
 
     return (
         <div className="home">

@@ -1,7 +1,8 @@
 import axiosML from "../config/axiosML"
 import ROUTE_MAP from "../config/urlBase"
+import { COLOR_PROCESS_BAR, RESULT_THRESHOLD_LEVELS } from "../config/vars"
 
-const UploadImage = async (file) => {
+export const UploadImage = async (file) => {
 	try {
 		var formData = new FormData()
 		formData.append("file", file)
@@ -45,30 +46,77 @@ const getImageFindings = async (imageId) => {
 	}
 }
 
-const handlePredictImage = async (file, dispatch) => {
-	const responseImage = await UploadImage(file)
-	dispatch({
-		type: "SET_UPLOADED_IMAGE",
-		uploadedImage: responseImage,
+const sortObjectByValue = (object) => {
+	var sorted = []
+	for (var key in object) {
+		sorted.push([key, object[key]])
+	}
+	sorted.sort((a, b) => {
+		return b[1] - a[1]
 	})
-	console.log(responseImage)
-	const imageId = responseImage.image.replace("/image/", "")
+	return sorted
+}
+
+const needShowFinding = (imageFindings) => {
+	const needShowingFindings = imageFindings.filter(
+		(findings) => findings[1] >= RESULT_THRESHOLD_LEVELS.INFO
+	)
+
+	return needShowingFindings
+}
+
+const addColors = (findings) => {
+	const addedColors = []
+	findings.forEach((finding, index) => {
+
+		if (finding[1] >= 0.8) {
+			finding.push(COLOR_PROCESS_BAR.HIGH)
+		} else if (finding[1] >= 0.7) {
+			finding.push(COLOR_PROCESS_BAR.WARNING)
+		} else if (finding[1] >= 0.6) {
+			finding.push(COLOR_PROCESS_BAR.LOW)
+		} else {
+			finding.push(COLOR_PROCESS_BAR.NORMAL)
+		}
+
+		addedColors[index] = finding
+	})
+	return addedColors
+}
+
+const needShowingInfo = (imageInfo) => {
+	const infoType = Object.keys(imageInfo).filter(
+		(info) => !info.includes("_probability")
+	)
+
+	const needShowingInfo = infoType.filter(
+		(type) => imageInfo[`${type}_probability`] >= RESULT_THRESHOLD_LEVELS.THRESHOLD
+	)
+
+	return needShowingInfo
+}
+
+const handlePredictImage = async (imageId, dispatch) => {
+	imageId = imageId.replace("/image/", "")
 
 	const imageInfo = await getImageInfo(imageId)
+	const selectedInfo = needShowingInfo(imageInfo)
 	dispatch({
 		type: "SET_INFO_IMAGE",
 		imageInfo: imageInfo,
+		needShowInfo: selectedInfo,
 	})
-	console.log(imageInfo)
-
-	if (imageInfo.class !== "fundus") return null
 
 	const imageFindings = await getImageFindings(imageId)
+	const sortedImageFindings = sortObjectByValue(imageFindings)
+	const addedColors = addColors(sortedImageFindings)
+	const selectedFindings = needShowFinding(sortedImageFindings)
+
 	dispatch({
 		type: "SET_FINDING_IMAGE",
-		imageFindings: imageFindings,
+		imageFindings: addedColors,
+		needShowFindings: selectedFindings,
 	})
-	console.log(imageFindings)
 }
 
 export default handlePredictImage
