@@ -1,0 +1,25 @@
+.login {
+  padding: 2em;
+  border-radius: 10px;
+  background-color: #CACBCD;
+  width: 20%;
+  max-width: 100%;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+}
+.login__form input {
+  box-shadow: 5px 5px #888888 !important;
+  border: none !important;
+}
+.login__form button {
+  box-shadow: 5px 5px #888888 !important;
+  background-color: #fff !important;
+  color: #CACBCD !important;
+}
+.login__form button:hover {
+  color: #085078 !important;
+  box-shadow: none !important;
+}
+
+/*# sourceMappingURL=Login.css.map */

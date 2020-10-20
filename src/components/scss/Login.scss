@@ -1,0 +1,28 @@
+@import './Config.scss';
+.login{
+    padding: 2em;
+    border-radius: 10px;
+    background-color: $primary-color;
+    width: 20%;
+    max-width: 100%;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+
+    &__form{
+        input{
+            box-shadow: 5px 5px #888888 !important;
+            border: none !important;
+        }
+        button{
+            box-shadow: 5px 5px #888888 !important;
+            background-color: #fff !important;
+            color: $primary-color !important;
+
+            &:hover{
+                color: #085078!important;
+                box-shadow: none !important;
+            }
+        }
+    }
+}
