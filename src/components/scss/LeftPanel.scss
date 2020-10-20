@@ -1,0 +1,68 @@
+@import "./Config.scss";
+
+.left-panel {
+	padding: 1.5em;
+	display: flex;
+	flex-direction: column;
+	color: $primary-color;
+
+	.file-info {
+		text-align: center;
+		align-items: center;
+
+		h4 {
+			margin: 0;
+		}
+
+		&::after {
+			display: inline-block;
+			content: "";
+			margin-top: 1.5em;
+			width: 90%;
+			height: 1px;
+			background: $primary-color;
+		}
+	}
+
+	.results {
+		display: flex;
+		flex-direction: column;
+		margin-top: 1em;
+		text-align: center;
+
+		&__info {
+			display: flex;
+			height: 26px;
+			padding: 0 1em;
+			gap: 1em;
+			margin-bottom: 2em;
+		}
+
+		&__graph {
+			display: flex;
+			flex-direction: column;
+			height: auto;
+			max-height: 100%;
+			gap: 1em;
+
+			&__process {
+				&__title {
+					display: flex;
+					justify-content: space-between;
+				}
+
+				&__bar {
+					width: 100%;
+					height: 10px;
+                    background-color: #fff;
+                    border-radius: 10px;
+
+					&__inner {
+                        height: 100%;
+                        border-radius: 10px;
+					}
+				}
+			}
+		}
+	}
+}

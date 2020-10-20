@@ -1,0 +1,42 @@
+@import './Config.scss';
+.navbar {
+	&__logo {
+		max-height: 100%;
+		width: 100%;
+        margin-bottom: 1.5em;
+        background-color: #fff;
+        border-radius: 50%;
+	}
+
+	&__button-list {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+        gap: 1.5em;
+        align-items: center;
+	}
+
+    &__button__link{
+        padding: 5px;
+    }
+
+	&__button {
+        padding: 0;
+        margin: 0 !important;
+        max-height: 100%;
+        border: none;
+        color: $leftPanel-color;
+        
+		&:nth-last-child(1) {
+			margin-top: auto !important;
+		}
+    }
+    .circle-icon{
+        border-radius:5px;
+        border: 2px solid $primary-color;
+        
+        .navbar__button{
+            color: $primary-color;
+        }
+    }
+}

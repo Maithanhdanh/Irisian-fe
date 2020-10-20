@@ -1,0 +1,36 @@
+.navbar__logo {
+  max-height: 100%;
+  width: 100%;
+  margin-bottom: 1.5em;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.navbar__button-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.5em;
+  align-items: center;
+}
+.navbar__button__link {
+  padding: 5px;
+}
+.navbar__button {
+  padding: 0;
+  margin: 0 !important;
+  max-height: 100%;
+  border: none;
+  color: #595959;
+}
+.navbar__button:nth-last-child(1) {
+  margin-top: auto !important;
+}
+.navbar .circle-icon {
+  border-radius: 5px;
+  border: 2px solid #CACBCD;
+}
+.navbar .circle-icon .navbar__button {
+  color: #CACBCD;
+}
+
+/*# sourceMappingURL=NavBar.css.map */
