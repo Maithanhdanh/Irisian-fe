@@ -14,7 +14,7 @@ const ROUTES_USER = {
 	LOGOUT: "/logout",
 	TOKEN: "/token",
 	IS_LOGIN: "",
-	REGISTER: "/register",
+	REGISTER: "/add",
 }
 
 const ROUTE_MAP = {

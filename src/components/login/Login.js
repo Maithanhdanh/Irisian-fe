@@ -9,10 +9,7 @@ import { useStateValue } from "../context/StateProvider"
 
 Login.propTypes = {
 	type: PropTypes.string,
-	initialState: {
-		email: PropTypes.string,
-		password: PropTypes.string,
-	},
+	initialState: PropTypes.object,
 }
 
 Login.defaultProps = {

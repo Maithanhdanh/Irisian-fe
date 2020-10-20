@@ -4,6 +4,7 @@ import { COLOR_PROCESS_BAR, RESULT_THRESHOLD_LEVELS } from "../config/vars"
 
 export const UploadImage = async (file) => {
 	try {
+
 		var formData = new FormData()
 		formData.append("file", file)
 
@@ -59,7 +60,7 @@ const sortObjectByValue = (object) => {
 
 const needShowFinding = (imageFindings) => {
 	const needShowingFindings = imageFindings.filter(
-		(findings) => findings[1] >= RESULT_THRESHOLD_LEVELS.INFO
+		(findings) => findings[1] >= RESULT_THRESHOLD_LEVELS.FINDINGS
 	)
 
 	return needShowingFindings
@@ -68,15 +69,26 @@ const needShowFinding = (imageFindings) => {
 const addColors = (findings) => {
 	const addedColors = []
 	findings.forEach((finding, index) => {
-
-		if (finding[1] >= 0.8) {
-			finding.push(COLOR_PROCESS_BAR.HIGH)
-		} else if (finding[1] >= 0.7) {
-			finding.push(COLOR_PROCESS_BAR.WARNING)
-		} else if (finding[1] >= 0.6) {
-			finding.push(COLOR_PROCESS_BAR.LOW)
+		if(finding[0] !== 'normal') {
+			if (finding[1] >= 0.8) {
+				finding.push(COLOR_PROCESS_BAR.HIGH)
+			} else if (finding[1] >= 0.7) {
+				finding.push(COLOR_PROCESS_BAR.WARNING)
+			} else if (finding[1] >= 0.6) {
+				finding.push(COLOR_PROCESS_BAR.LOW)
+			} else {
+				finding.push(COLOR_PROCESS_BAR.NORMAL)
+			}
 		} else {
-			finding.push(COLOR_PROCESS_BAR.NORMAL)
+			if (finding[1] >= 0.8) {
+				finding.push(COLOR_PROCESS_BAR.NORMAL)
+			} else if (finding[1] >= 0.7) {
+				finding.push(COLOR_PROCESS_BAR.LOW)
+			} else if (finding[1] >= 0.6) {
+				finding.push(COLOR_PROCESS_BAR.WARNING)
+			} else {
+				finding.push(COLOR_PROCESS_BAR.HIGH)
+			}
 		}
 
 		addedColors[index] = finding
@@ -90,7 +102,7 @@ const needShowingInfo = (imageInfo) => {
 	)
 
 	const needShowingInfo = infoType.filter(
-		(type) => imageInfo[`${type}_probability`] >= RESULT_THRESHOLD_LEVELS.THRESHOLD
+		(type) => imageInfo[`${type}_probability`] >= RESULT_THRESHOLD_LEVELS.INFO
 	)
 
 	return needShowingInfo

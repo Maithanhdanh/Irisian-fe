@@ -1,16 +1,46 @@
 import React, { useEffect, useState } from "react"
-import { RESULT_THRESHOLD_LEVELS } from "../../../config/vars"
 import { useStateValue } from "../../context/StateProvider"
 import "../../css/LeftPanel.css"
+import { createSequence } from "../../../helpers/sequence"
 
 function LeftPanel() {
-	const [NUM_BAR, setNUM_BAR] = useState(RESULT_THRESHOLD_LEVELS.NUM_BAR)
 	const [
 		{ currImage, needShowInfo, imageInfo, needShowFindings },
 	] = useStateValue()
 
+	const [returnBar, setReturnBar] = useState([])
+
+	const resultBar = (findingsLength) => {
+		var NUM_BAR = createSequence(findingsLength)
+		setReturnBar(NUM_BAR.map((num, index) => (
+			<div className="results__graph__process" key={index}>
+				<div className="results__graph__process__title">
+					<label >{needShowFindings[index][0].split(", ")[0]}</label>
+					<label >
+						{(needShowFindings[index][1] * 100).toFixed(2)}%
+					</label>
+				</div>
+				<div className="results__graph__process__bar">
+					<div
+						className="results__graph__process__bar__inner"
+						style={{
+							width: `${needShowFindings[index][1] * 100}%`,
+							backgroundColor: needShowFindings[index][2],
+						}}
+					></div>
+				</div>
+			</div>
+		)))
+	}
+
+	useEffect(() => {
+		console.log(needShowInfo)
+	}, [needShowInfo])
+
 	useEffect(() => {
 		console.log(needShowFindings)
+		if (!needShowFindings) return setReturnBar([])
+		resultBar(needShowFindings?.length)
 	}, [needShowFindings])
 
 	return (
@@ -31,27 +61,7 @@ function LeftPanel() {
 				</div>
 
 				<div className="results__graph">
-					{needShowFindings?.length !== 0 ? (
-						needShowFindings?.map((finding, index) => (
-							<div className="results__graph__process">
-								<div className="results__graph__process__title">
-									<label for="file">{finding[0].split(", ")[0]}</label>
-									<label for="file">{(finding[1] * 100).toFixed(2)}%</label>
-								</div>
-								<div className="results__graph__process__bar">
-									<div
-										className="results__graph__process__bar__inner"
-										style={{
-											width: `${finding[1] * 100}%`,
-											backgroundColor: finding[2],
-										}}
-									></div>
-								</div>
-							</div>
-						))
-					) : (
-						<h2>Not Sure</h2>
-					)}
+					{needShowFindings?.length !== 0 ? returnBar : <h2>Not Sure</h2>}
 				</div>
 			</div>
 		</div>
