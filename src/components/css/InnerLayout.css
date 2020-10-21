@@ -1,8 +1,8 @@
-.home {
+.inner-layout {
   display: flex;
   flex-direction: row;
 }
-.home .navbar {
+.inner-layout .navbar {
   padding: 7px;
   display: flex;
   grid-column: 1;
@@ -11,13 +11,13 @@
   background-color: #0A91AB;
   flex: 0 1 4vw;
 }
-.home .right-panel {
+.inner-layout .right-panel {
   background-color: #000;
   flex: 0 1 65%;
 }
-.home .left-panel {
+.inner-layout .left-panel {
   flex: 1 1 auto;
   background-color: #595959;
 }
 
-/*# sourceMappingURL=Home.css.map */
+/*# sourceMappingURL=InnerLayout.css.map */

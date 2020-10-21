@@ -1,7 +1,8 @@
 import axios from "axios"
 import queryString from "query-string"
 import ROUTE_MAP from "./urlBase"
-import {NAVIGATE_DOMAIN} from "./vars"
+import { NAVIGATE_DOMAIN } from "./vars"
+import Cookie from "js-cookie"
 
 const getAccessToken = () => {
 	const refreshToken = localStorage.getItem("refresh_token")
@@ -56,6 +57,23 @@ axiosAuth.interceptors.request.use(async (config) => {
 axiosAuth.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {
+			response.data.response.accessToken &&
+				localStorage.setItem("access_token", response.data.response.accessToken)
+			response.data.response.expiresIn &&
+				localStorage.setItem(
+					"access_token_expired",
+					response.data.response.expiresIn
+				)
+			response.data.response.user &&
+				localStorage.setItem(
+					"user",
+					JSON.stringify(response.data.response.user)
+				)
+			response.data.response.refreshToken_expiresIn &&
+				localStorage.setItem(
+					"refreshToken_expiresIn",
+					response.data.response.refreshToken_expiresIn
+				)
 			return response.data
 		}
 

@@ -15,15 +15,22 @@
 .navbar__button__link {
   padding: 5px;
 }
+.navbar__button__link:hover {
+  border-radius: 5px;
+  border: 2px solid #CACBCD;
+}
+.navbar__button__link:hover .navbar__button {
+  color: #CACBCD;
+}
+.navbar__button__link:nth-last-child(1) {
+  margin-top: auto !important;
+}
 .navbar__button {
   padding: 0;
   margin: 0 !important;
   max-height: 100%;
   border: none;
   color: #595959;
-}
-.navbar__button:nth-last-child(1) {
-  margin-top: auto !important;
 }
 .navbar .circle-icon {
   border-radius: 5px;

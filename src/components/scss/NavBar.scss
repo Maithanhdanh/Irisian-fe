@@ -18,6 +18,17 @@
 
     &__button__link{
         padding: 5px;
+        &:hover{
+            border-radius:5px;
+            border: 2px solid $primary-color;
+            .navbar__button{
+                color: $primary-color;
+            }
+        }
+
+        &:nth-last-child(1) {
+			margin-top: auto !important;
+        }
     }
 
 	&__button {
@@ -27,9 +38,7 @@
         border: none;
         color: $leftPanel-color;
         
-		&:nth-last-child(1) {
-			margin-top: auto !important;
-		}
+		
     }
     .circle-icon{
         border-radius:5px;

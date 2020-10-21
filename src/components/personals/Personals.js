@@ -1,18 +1,19 @@
-import React, { useEffect } from "react"
-import { useHistory } from "react-router-dom"
-import axiosAuth from "../../config/axiosAuth"
-import { useStateValue } from "../context/StateProvider"
-import "../css/InnerLayout.css"
-import NavBar from "../navBar/NavBar"
-import LeftPanel from "../panels/upload/LeftPanel"
-import RightPanel from "../panels/upload/RightPanel"
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import axiosAuth from '../../config/axiosAuth'
+import axiosClient from '../../config/axiosClient'
+import { useStateValue } from '../context/StateProvider'
+import '../css/InnerLayout.css'
+import NavBar from '../navBar/NavBar'
+import LeftPanelHis from '../panels/history/LeftPanelHis'
+import RightPanelHis from '../panels/history/RightPanelHis'
 
-function Home() {
-	const history = useHistory()
-	const [{}, dispatch] = useStateValue()
+function Personals() {
+    const history = useHistory()
+	const [{user}, dispatch] = useStateValue()
 
 	useEffect(() => {
-		const getNewAccessToken = async () => {
+		const getHistory = async () => {
 			try {
                 const refreshToken_expiresIn = localStorage.getItem("refreshToken_expiresIn")
                 if (refreshToken_expiresIn < Date.now()) return history.push("/login")
@@ -22,7 +23,7 @@ function Home() {
                 const expiresIn = localStorage.getItem("access_token_expired")
 
                 if(!user || !accessToken || !expiresIn || expiresIn < Date.now()){
-                    const getAccessToken = axiosAuth({
+                    const getAccessToken = axiosClient({
                         method: "GET",
                         url: "/auth/token",
                     })
@@ -42,16 +43,16 @@ function Home() {
 			}
 		}
 
-		getNewAccessToken()
-	})
-
-	return (
-		<div className="inner-layout">
+		getHistory()
+    },[user])
+    
+    return (
+        <div className="inner-layout">
 			<NavBar className="navbar" />
-			<LeftPanel className="left-panel" />
-			<RightPanel className="right-panel" />
+			<LeftPanelHis className="left-panel" />
+			<RightPanelHis className="right-panel" />
 		</div>
-	)
+    )
 }
 
-export default Home
+export default Personals

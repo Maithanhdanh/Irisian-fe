@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { useStateValue } from "../../../context/StateProvider"
 import handlePredictImage from "../../../../helpers/predictImage"
@@ -27,11 +27,15 @@ function UploadedImage() {
 		setInvert(0)
 	}
 
+	useEffect(() => {
+		console.log(uploadedImage)
+	},[uploadedImage])
+
 	const handleClear = () => {
 		dispatch({ type: "REMOVE_CURRENT_IMAGE" })
 	}
 	const handlePrediction = async () => {
-		handlePredictImage(uploadedImage.image, dispatch)
+		handlePredictImage(uploadedImage.imageId, dispatch)
 	}
 	
 	return (
@@ -118,9 +122,9 @@ function UploadedImage() {
 					</div>
 				</div>
 			</div>
-			<div className="thumb" key={uploadedImage.no_background}>
+			<div className="thumb" key={uploadedImage.noBackgroundImageId}>
 				<div className="thumbInner">
-					<img src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/${uploadedImage.no_background}`} alt="preview" />
+					<img src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/image/${uploadedImage.noBackgroundImageId}`} alt="preview" />
 				</div>
 			</div>
 			<div className="nav__buttons">

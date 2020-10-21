@@ -1,4 +1,4 @@
-import axiosML from "../config/axiosML"
+import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
 import { COLOR_PROCESS_BAR, RESULT_THRESHOLD_LEVELS } from "../config/vars"
 
@@ -8,14 +8,15 @@ export const UploadImage = async (file) => {
 		var formData = new FormData()
 		formData.append("file", file)
 
-		const response = await axiosML({
+		const response = await axiosClient({
 			method: ROUTE_MAP.IMAGE.UPLOAD.METHOD,
 			url: ROUTE_MAP.IMAGE.UPLOAD.PATH,
 			data: formData,
 			headers: { "Content-Type": "multipart/form-data" },
 		})
 
-		return response
+		if(response.error) alert(`[UPLOAD IMAGE] failed`)
+		return response.response.data
 	} catch (e) {
 		alert(`[UPLOAD IMAGE] ${e}`)
 	}
@@ -23,12 +24,13 @@ export const UploadImage = async (file) => {
 
 const getImageInfo = async (imageId) => {
 	try {
-		const response = await axiosML({
+		const response = await axiosClient({
 			method: ROUTE_MAP.IMAGE.INFO.METHOD,
 			url: ROUTE_MAP.IMAGE.INFO.PATH + `/${imageId}`,
 		})
 
-		return response
+		if(response.error) alert(`[PREDICT IMAGE] failed`)
+		return response.response.data
 	} catch (e) {
 		alert(`[PREDICT IMAGE] ${e}`)
 	}
@@ -36,12 +38,13 @@ const getImageInfo = async (imageId) => {
 
 const getImageFindings = async (imageId) => {
 	try {
-		const response = await axiosML({
+		const response = await axiosClient({
 			method: ROUTE_MAP.IMAGE.FINDING.METHOD,
 			url: ROUTE_MAP.IMAGE.FINDING.PATH + `/${imageId}`,
 		})
 
-		return response
+		if(response.error) alert(`[FINDING IMAGE] failed`)
+		return response.response.data
 	} catch (e) {
 		alert(`[FINDING IMAGE] ${e}`)
 	}
@@ -112,6 +115,7 @@ const handlePredictImage = async (imageId, dispatch) => {
 	imageId = imageId.replace("/image/", "")
 
 	const imageInfo = await getImageInfo(imageId)
+	console.log(imageInfo)
 	const selectedInfo = needShowingInfo(imageInfo)
 	dispatch({
 		type: "SET_INFO_IMAGE",
@@ -120,6 +124,7 @@ const handlePredictImage = async (imageId, dispatch) => {
 	})
 
 	const imageFindings = await getImageFindings(imageId)
+	console.log(imageFindings)
 	const sortedImageFindings = sortObjectByValue(imageFindings)
 	const addedColors = addColors(sortedImageFindings)
 	const selectedFindings = needShowFinding(sortedImageFindings)
