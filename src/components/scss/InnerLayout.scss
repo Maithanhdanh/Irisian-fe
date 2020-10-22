@@ -14,12 +14,12 @@
         background-color: $navbar_color;
         flex: 0 1 4vw;
     }
-    .right-panel{
+    .right-panel, .right-panel-his{
         background-color: $rightPanel-color;
         flex: 0 1 65%;
     }
     
-    .left-panel{
+    .left-panel, .left-panel-his{
         flex: 1 1 auto;
         background-color: $leftPanel-color;
     }

@@ -69,7 +69,7 @@
             border-radius: 20px;
             border-top: 1px solid $primary-color;
             border-bottom: 1px solid $primary-color;
-            width:70%;
+            width:60%;
             flex: 0 1 10%;
             &__group{
                 display: flex;
@@ -103,10 +103,11 @@
                 }
 
                 &__control{
-
+                    box-sizing: border-box;
+                    padding: 0 20%;
                     font-size: 18px;
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: space-around;
                     color: $primary-color;
                     align-items: center;
                 }

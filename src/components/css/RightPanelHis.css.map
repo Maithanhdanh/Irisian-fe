@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"RightPanelHis.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/RightPanelHis.scss","../scss/Config.scss"],"names":[],"mappings":"AAEA;EACC;EACA;EACG;EACA,OCNW;EDOX;;AAEH;EACO;EACA;EACN;EACA;;AAEA;EACU;EACA;EACA;;AACT;EACC;EACY;EACA,kBChBI","file":"RightPanelHis.css"}

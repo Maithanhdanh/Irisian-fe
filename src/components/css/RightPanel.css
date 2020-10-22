@@ -63,7 +63,7 @@
   border-radius: 20px;
   border-top: 1px solid #CACBCD;
   border-bottom: 1px solid #CACBCD;
-  width: 70%;
+  width: 60%;
   flex: 0 1 10%;
   display: flex;
   flex-direction: row;
@@ -99,9 +99,11 @@
   align-self: center;
 }
 .right-panel .thumbsContainer .process__buttons__group__control {
+  box-sizing: border-box;
+  padding: 0 20%;
   font-size: 18px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   color: #CACBCD;
   align-items: center;
 }

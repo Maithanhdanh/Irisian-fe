@@ -11,11 +11,11 @@
   background-color: #0A91AB;
   flex: 0 1 4vw;
 }
-.inner-layout .right-panel {
+.inner-layout .right-panel, .inner-layout .right-panel-his {
   background-color: #000;
   flex: 0 1 65%;
 }
-.inner-layout .left-panel {
+.inner-layout .left-panel, .inner-layout .left-panel-his {
   flex: 1 1 auto;
   background-color: #595959;
 }

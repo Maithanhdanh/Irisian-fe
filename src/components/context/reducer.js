@@ -14,6 +14,7 @@ export const initialState = {
 	needShowInfo: null,
 	imageFindings: {},
 	needShowFindings: null,
+	detailUserInfo: {},
 }
 
 const reducer = (state, action) => {

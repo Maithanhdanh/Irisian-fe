@@ -13,49 +13,19 @@ import "semantic-ui-css/semantic.min.css"
 import Dashboard from "./components/dashboard/Dashboard"
 import Personals from "./components/personals/Personals"
 import { useStateValue } from "./components/context/StateProvider"
-import axiosAuth from "./config/axiosAuth"
+import { getAccessToken } from "./helpers/token"
 
 function App() {
 	const [{ user }, dispatch] = useStateValue()
 	const history = useHistory()
 	useEffect(() => {
+		if(history === undefined) return
 		const checkSession = async () => {
-			const user = JSON.parse(localStorage.getItem("user"))
-			const accessToken = localStorage.getItem("access_token")
-			const expiresIn = parseInt(localStorage.getItem("access_token_expired"))
-			const refreshToken_expiresIn = parseInt(
-				localStorage.getItem("refreshToken_expiresIn")
-			)
+			const token = await getAccessToken()
 
-			if (
-				!user ||
-				!accessToken ||
-				!expiresIn ||
-				!refreshToken_expiresIn ||
-				refreshToken_expiresIn < Date.now()
-			) {
-				return localStorage.clear()
-			} else if (expiresIn < Date.now()) {
-				const getAccessToken = axiosAuth({
-					method: "GET",
-					url: "/auth/token",
-				})
-				const getAccessTokenData = await getAccessToken
-
-				if (!getAccessToken || getAccessTokenData.error)
-					return history.push("/login")
-				const accessToken = getAccessTokenData.response
-
-				dispatch({
-					type: "SET_USER",
-					user: accessToken.user,
-				})
-			}
-
-			dispatch({
-				type: "SET_USER",
-				user: user,
-			})
+			if(token == null) return history.push("/login")
+			console.log(token)
+			dispatch({ type: "SET_USER", user: token.user })
 		}
 
 		checkSession()

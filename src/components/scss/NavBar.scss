@@ -19,9 +19,10 @@
     &__button__link{
         padding: 5px;
         &:hover{
+            box-sizing: border-box;
             border-radius:5px;
-            border: 2px solid $primary-color;
             .navbar__button{
+                transition: color 0.3s;
                 color: $primary-color;
             }
         }
@@ -41,6 +42,7 @@
 		
     }
     .circle-icon{
+        box-sizing: border-box;
         border-radius:5px;
         border: 2px solid $primary-color;
         

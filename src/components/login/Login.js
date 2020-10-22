@@ -6,6 +6,7 @@ import axiosAuth from "../../config/axiosAuth"
 import ROUTE_MAP from "../../config/urlBase"
 import { useHistory } from "react-router-dom"
 import { useStateValue } from "../context/StateProvider"
+import axiosClient from "../../config/axiosClient"
 
 Login.propTypes = {
 	type: PropTypes.string,
@@ -39,8 +40,8 @@ function Login({ type, initialState }) {
 
 		if (user && accessToken && expiresIn && expiresIn >= Date.now()) {
 			dispatch({
-				type:"SET_USER",
-				user:JSON.parse(user)
+				type: "SET_USER",
+				user: JSON.parse(user),
 			})
 			return history.push("/")
 		}
@@ -51,12 +52,12 @@ function Login({ type, initialState }) {
 			e.preventDefault()
 			const token =
 				type === "register"
-					? await axiosAuth({
+					? await axiosClient({
 							method: ROUTE_MAP.USER.REGISTER.METHOD,
 							url: ROUTE_MAP.USER.REGISTER.PATH,
 							data: formData,
 					  })
-					: await axiosAuth({
+					: await axiosClient({
 							method: ROUTE_MAP.USER.LOGIN.METHOD,
 							url: ROUTE_MAP.USER.LOGIN.PATH,
 							data: formData,
@@ -64,10 +65,10 @@ function Login({ type, initialState }) {
 
 			const tokenData = await token
 			if (tokenData.error) return alert("failed to login")
-
+			console.log(tokenData)
 			dispatch({
-				type:"SET_USER",
-				user:tokenData.response.user
+				type: "SET_USER",
+				user: tokenData.response.user,
 			})
 
 			history.push("/")

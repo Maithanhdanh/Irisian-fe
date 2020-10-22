@@ -16,10 +16,11 @@
   padding: 5px;
 }
 .navbar__button__link:hover {
+  box-sizing: border-box;
   border-radius: 5px;
-  border: 2px solid #CACBCD;
 }
 .navbar__button__link:hover .navbar__button {
+  transition: color 0.3s;
   color: #CACBCD;
 }
 .navbar__button__link:nth-last-child(1) {
@@ -33,6 +34,7 @@
   color: #595959;
 }
 .navbar .circle-icon {
+  box-sizing: border-box;
   border-radius: 5px;
   border: 2px solid #CACBCD;
 }

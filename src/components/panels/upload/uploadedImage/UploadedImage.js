@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { useStateValue } from "../../../context/StateProvider"
 import handlePredictImage from "../../../../helpers/predictImage"
 import { NAVIGATE_DOMAIN } from "../../../../config/vars"
+import { RULE_FILTER_CHANGE } from "../../../../config/vars"
 
 UploadedImage.propTypes = {
 	file: PropTypes.object,
@@ -13,23 +14,37 @@ UploadedImage.defaultProps = {
 
 function UploadedImage() {
 	const [{ uploadedImage }, dispatch] = useStateValue()
-	const [brightness, setBrightness] = useState(0)
-	const [contrast, setContrast] = useState(0)
-	const [grayscale, setGrayscale] = useState(0)
-	const [saturate, setSaturate] = useState(0)
-	const [invert, setInvert] = useState(0)
+	const [brightness, setBrightness] = useState(
+		RULE_FILTER_CHANGE.BRIGHTNESS.INIT
+	)
+	const [contrast, setContrast] = useState(RULE_FILTER_CHANGE.CONTRAST.INIT)
+	const [grayscale, setGrayscale] = useState(RULE_FILTER_CHANGE.GRAYSCALE.INIT)
+	const [imgStyle, setImageStyle] = useState({})
 
 	const clearFilter = () => {
-		setBrightness(0)
-		setContrast(0)
-		setGrayscale(0)
-		setSaturate(0)
-		setInvert(0)
+		setBrightness(RULE_FILTER_CHANGE.BRIGHTNESS.INIT)
+		setContrast(RULE_FILTER_CHANGE.CONTRAST.INIT)
+		setGrayscale(RULE_FILTER_CHANGE.GRAYSCALE.INIT)
 	}
+	const checkChange = (type, change) => {
+		console.log(RULE_FILTER_CHANGE[type]?.LOW, RULE_FILTER_CHANGE[type]?.UP)
+		if (RULE_FILTER_CHANGE[type]?.LOW == null && RULE_FILTER_CHANGE[type]?.UP == null)
+			return roundNum(change)
+
+			console.log(change, RULE_FILTER_CHANGE[type]?.LOW, change < RULE_FILTER_CHANGE[type]?.LOW)
+		if (RULE_FILTER_CHANGE[type]?.LOW != null && change < RULE_FILTER_CHANGE[type]?.LOW)
+			return RULE_FILTER_CHANGE[type].LOW
+			console.log(change, RULE_FILTER_CHANGE[type]?.UP, change > RULE_FILTER_CHANGE[type]?.UP)
+		if (RULE_FILTER_CHANGE[type]?.UP != null&& change > RULE_FILTER_CHANGE[type]?.UP)
+			return RULE_FILTER_CHANGE[type].UP
+
+		return roundNum(change)
+	}
+	const roundNum = (num) => Math.round(num * 10) / 10
 
 	useEffect(() => {
-		console.log(uploadedImage)
-	},[uploadedImage])
+		console.log(imgStyle)
+	}, [imgStyle])
 
 	const handleClear = () => {
 		dispatch({ type: "REMOVE_CURRENT_IMAGE" })
@@ -37,7 +52,13 @@ function UploadedImage() {
 	const handlePrediction = async () => {
 		handlePredictImage(uploadedImage.imageId, dispatch)
 	}
-	
+
+	useEffect(() => {
+		setImageStyle({
+			filter: ` contrast(${contrast}) brightness(${brightness}) grayscale(${grayscale})`,
+		})
+	}, [brightness, contrast, grayscale])
+
 	return (
 		<div className="thumbsContainer">
 			<div className="process__buttons">
@@ -51,12 +72,20 @@ function UploadedImage() {
 					<div className="process__buttons__group__control">
 						<i
 							className="plus circle icon"
-							onClick={() => setBrightness(brightness + 1)}
+							onClick={() =>
+								setBrightness(
+									checkChange('BRIGHTNESS',brightness + RULE_FILTER_CHANGE.BRIGHTNESS.CHANGE)
+								)
+							}
 						></i>
 						{brightness}
 						<i
 							className="minus circle icon"
-							onClick={() => setBrightness(brightness - 1)}
+							onClick={() =>
+								setBrightness(
+									checkChange('BRIGHTNESS',brightness - RULE_FILTER_CHANGE.BRIGHTNESS.CHANGE)
+								)
+							}
 						></i>
 					</div>
 				</div>
@@ -65,54 +94,42 @@ function UploadedImage() {
 					<div className="process__buttons__group__control">
 						<i
 							className="plus circle icon"
-							onClick={() => setContrast(contrast + 1)}
+							onClick={() =>
+								setContrast(
+									checkChange('CONTRAST',contrast + RULE_FILTER_CHANGE.CONTRAST.CHANGE)
+								)
+							}
 						></i>
 						{contrast}
 						<i
 							className="minus circle icon"
-							onClick={() => setContrast(contrast - 1)}
+							onClick={() =>
+								setContrast(
+									checkChange('CONTRAST',contrast - RULE_FILTER_CHANGE.CONTRAST.CHANGE)
+								)
+							}
 						></i>
 					</div>
 				</div>
 				<div className="process__buttons__group">
-					<span>Grayscale</span>
+					<span>Red free</span>
 					<div className="process__buttons__group__control">
 						<i
 							className="plus circle icon"
-							onClick={() => setGrayscale(grayscale + 1)}
+							onClick={() =>
+								setGrayscale(
+									checkChange('GRAYSCALE',grayscale + RULE_FILTER_CHANGE.GRAYSCALE.CHANGE)
+								)
+							}
 						></i>
 						{grayscale}
 						<i
 							className="minus circle icon"
-							onClick={() => setGrayscale(grayscale - 1)}
-						></i>
-					</div>
-				</div>
-				<div className="process__buttons__group">
-					<span>Saturate</span>
-					<div className="process__buttons__group__control">
-						<i
-							className="plus circle icon"
-							onClick={() => setSaturate(saturate + 1)}
-						></i>
-						{saturate}
-						<i
-							className="minus circle icon"
-							onClick={() => setSaturate(saturate - 1)}
-						></i>
-					</div>
-				</div>
-				<div className="process__buttons__group">
-					<span>Invert</span>
-					<div className="process__buttons__group__control">
-						<i
-							className="plus circle icon"
-							onClick={() => setInvert(invert + 1)}
-						></i>
-						{invert}
-						<i
-							className="minus circle icon"
-							onClick={() => setInvert(invert - 1)}
+							onClick={() =>
+								setGrayscale(
+									checkChange('GRAYSCALE',grayscale - RULE_FILTER_CHANGE.GRAYSCALE.CHANGE)
+								)
+							}
 						></i>
 					</div>
 				</div>
@@ -124,7 +141,11 @@ function UploadedImage() {
 			</div>
 			<div className="thumb" key={uploadedImage.noBackgroundImageId}>
 				<div className="thumbInner">
-					<img src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/image/${uploadedImage.noBackgroundImageId}`} alt="preview" />
+					<img
+						src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/image/${uploadedImage.noBackgroundImageId}`}
+						alt="preview"
+						style={imgStyle}
+					/>
 				</div>
 			</div>
 			<div className="nav__buttons">

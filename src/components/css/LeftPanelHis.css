@@ -1,3 +1,37 @@
-
+.left-panel-his {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  padding: 1.5em;
+  gap: 1.5em;
+}
+.left-panel-his .avatar {
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 1em;
+  box-sizing: border-box;
+  height: 20%;
+  margin: 0 auto;
+}
+.left-panel-his .avatar img {
+  object-fit: cover;
+  height: 100%;
+  width: auto;
+}
+.left-panel-his .info {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.left-panel-his .info .label {
+  width: 20%;
+  max-width: 100%;
+}
+.left-panel-his .button-list {
+  display: flex;
+  justify-content: center;
+}
 
 /*# sourceMappingURL=LeftPanelHis.css.map */

@@ -1,0 +1,39 @@
+@import'./Config.scss';
+
+.left-panel-his{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    padding: 1.5em;
+    gap:1.5em;
+    .avatar{
+        background-color: #fff;
+        border-radius:50%;
+        padding: 1em;
+        box-sizing: border-box;
+        height: 20%;
+        margin: 0 auto;
+        img{
+            object-fit: cover;
+            height: 100%;
+            width: auto;
+        }
+    }
+    .info{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        
+        .label{
+            width:20%;
+            max-width:100%;
+        }
+    }
+
+    .button-list{
+        display: flex;
+        justify-content: center;
+    }
+}
