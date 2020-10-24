@@ -16,7 +16,6 @@ const axiosClient = axios.create({
 })
 
 axiosClient.interceptors.request.use(async (config) => {
-	console.count('axiosClient')
 	const token = await getAccessTokenForAxios()
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`

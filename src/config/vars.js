@@ -26,3 +26,5 @@ export const RULE_FILTER_CHANGE = {
 	CONTRAST: { INIT:1, CHANGE: 1, LOW:1},
 	GRAYSCALE: { INIT:0, CHANGE: 1, LOW:0, UP:1},
 }
+
+export const DATE_FORMAT="DD/MM/YYYY"

@@ -29,6 +29,10 @@ axiosAuth.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {
 			storeToken(response.data)
+			if(!response.data?.uid && response.data?._id){
+				response.data.uid = response.data._id
+				delete response.data._id
+			}
 			return response.data
 		}
 

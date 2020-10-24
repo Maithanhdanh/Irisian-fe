@@ -21,10 +21,10 @@ function App() {
 	useEffect(() => {
 		if(history === undefined) return
 		const checkSession = async () => {
+			console.log('app nà')
 			const token = await getAccessToken()
 
 			if(token == null) return history.push("/login")
-			console.log(token)
 			dispatch({ type: "SET_USER", user: token.user })
 		}
 

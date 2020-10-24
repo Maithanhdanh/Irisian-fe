@@ -1,0 +1,14 @@
+.disease-filter {
+  display: flex;
+  position: absolute;
+  z-index: 100;
+  background-color: #fff;
+  flex-direction: column;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 1em;
+  gap: 10px;
+  width: 18vw;
+}
+
+/*# sourceMappingURL=DiseaseFilterPanel.css.map */

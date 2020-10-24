@@ -50,7 +50,7 @@ const getImageFindings = async (imageId) => {
 	}
 }
 
-const sortObjectByValue = (object) => {
+export const sortObjectByValue = (object) => {
 	var sorted = []
 	for (var key in object) {
 		sorted.push([key, object[key]])
@@ -61,7 +61,7 @@ const sortObjectByValue = (object) => {
 	return sorted
 }
 
-const needShowFinding = (imageFindings) => {
+export const needShowFinding = (imageFindings) => {
 	const needShowingFindings = imageFindings.filter(
 		(findings) => findings[1] >= RESULT_THRESHOLD_LEVELS.FINDINGS
 	)
@@ -69,7 +69,7 @@ const needShowFinding = (imageFindings) => {
 	return needShowingFindings
 }
 
-const addColors = (findings) => {
+export const addColors = (findings) => {
 	const addedColors = []
 	findings.forEach((finding, index) => {
 		if(finding[0] !== 'normal') {
@@ -99,7 +99,7 @@ const addColors = (findings) => {
 	return addedColors
 }
 
-const needShowingInfo = (imageInfo) => {
+export const needShowingInfo = (imageInfo) => {
 	const infoType = Object.keys(imageInfo).filter(
 		(info) => !info.includes("_probability")
 	)

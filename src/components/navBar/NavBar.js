@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useHistory, useLocation } from "react-router-dom"
 import axiosAuth from "../../config/axiosAuth"
 import { useStateValue } from "../context/StateProvider"
 import ROUTE_MAP from "../../config/urlBase"
 import "../css/NavBar.css"
 
 function NavBar() {
+	const history = useHistory()
 	const location = useLocation().pathname
 	const [{}, dispatch] = useStateValue()
 
@@ -28,6 +29,7 @@ function NavBar() {
 			})
 			dispatch({ type: "LOGOUT" })
 			localStorage.clear()
+			history.push("/login")
 		} catch (e) {
 			alert(e)
 		}

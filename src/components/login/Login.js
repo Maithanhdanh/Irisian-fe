@@ -65,7 +65,6 @@ function Login({ type, initialState }) {
 
 			const tokenData = await token
 			if (tokenData.error) return alert("failed to login")
-			console.log(tokenData)
 			dispatch({
 				type: "SET_USER",
 				user: tokenData.response.user,

@@ -3,28 +3,97 @@
 .right-panel-his {
 	display: flex;
 	flex-direction: column;
-    gap: 2em;
-    color:$primary-color;
-    padding:1.5em;
+	color: $primary-color;
+	padding: 1.5em;
+
+	h1 {
+		letter-spacing: 3px;
+		text-transform: uppercase;
+		margin: 0;
+	}
 
 	.header {
-        padding: 1em;
-        display: flex;
+		padding: 0 10px;
+		align-items: center;
+		display: flex;
 		height: 8%;
 		width: 100%;
+        margin-bottom: 2em;
+        background-color:$background-primary;
+        box-shadow: 0,0,.15, rgba(0,0,0,.25);
+        border-radius: 10px;
+
+		&__title {
+            color:$rightPanel-color;
+			font-size: 20px;
+			font-weight: 800;
+			margin-left: 50px;
+		}
 
 		.filter-bar {
-            margin: auto;
-            display: flex;
+			margin: auto;
+			display: flex;
             gap: 20px;
+            
 			.input {
 				opacity: 0.5;
-                border-radius: 10px;
-                background-color: $background-primary;
-            }
-            button{
+				border-radius: 10px;
+				background-color: $background-primary;
+				padding: 10px 20;
 
+				i {
+					margin-left: 7px;
+				}
+			}
+			button {
+				padding: 10px 20px;
+                border-radius: 10px;
+                background-color: #00B5AD;
+                border-color: teal;
             }
+            &__button {
+                position: relative;
+                &__choice{
+                    margin-top:5px;
+                    position: absolute;
+                    z-index: 100;
+				}
+				.normal_disease{
+					background-color: #fff;
+				}
+				.selected_disease{
+					background-color:#00B5AD;
+				}
+            }
+		}
+	}
+	.history {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 2%;
+		height: 78vh;
+		justify-content: space-around;
+		overflow-y: auto;
+        
+		&::-webkit-scrollbar {
+            width: 10px;
+		}
+        
+		/* Track */
+		&::-webkit-scrollbar-track {
+            border-radius: 5px;
+			background: #f1f1f1;
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #888;
+		}
+
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: #555;
 		}
 	}
 }

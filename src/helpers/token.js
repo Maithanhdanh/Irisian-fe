@@ -72,15 +72,17 @@ export const getAccessToken = async () => {
 }
 
 export const storeToken = (response) => {
-	console.log(response)
-	response.accessToken &&
-		localStorage.setItem("access_token", response.accessToken)
-	response.expiresIn &&
-		localStorage.setItem("access_token_expired", response.expiresIn)
-	response.user && localStorage.setItem("user", JSON.stringify(response.user))
-	response.refreshToken_expiresIn &&
+	console.log(response.response)
+	if(!response.response) return
+	response.response.accessToken &&
+		localStorage.setItem("access_token", response.response.accessToken)
+	response.response.expiresIn &&
+		localStorage.setItem("access_token_expired", response.response.expiresIn)
+	response.response.user &&
+		localStorage.setItem("user", JSON.stringify(response.response.user))
+	response.response.refreshToken_expiresIn &&
 		localStorage.setItem(
 			"refreshToken_expiresIn",
-			response.refreshToken_expiresIn
+			response.response.refreshToken_expiresIn
 		)
 }

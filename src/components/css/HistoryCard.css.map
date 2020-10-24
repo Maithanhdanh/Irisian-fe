@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"HistoryCard.css"}
+{"version":3,"sourceRoot":"","sources":["../scss/HistoryCard.scss"],"names":[],"mappings":"AAEA;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;EACA;EACA;EACA;;AAEJ;EACI;EACA;EACA;;AACA;EACI;;AAGJ;EACI;EACA;EACA;EACA;EACA;;AAEA;EAmBI;;AAlBA;EACI;EACA;EACA;EACA;;AAEA;EACI;EACA;EACA;;AAEJ;EACI;EACA;EACA;EACA;;AASpB;EACI;EACA;EACA;EACA;EACA;EACA;EACA;EACA","file":"HistoryCard.css"}

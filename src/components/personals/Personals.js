@@ -15,31 +15,31 @@ function Personals() {
 	useEffect(() => {
 		if(history === undefined) return
 		const checkSession = async () => {
-            console.count('personals')
 			const token = await getAccessToken()
 
 			if(token == null) return history.push("/login")
-			console.log(token)
 			dispatch({ type: "SET_USER", user: token })
 		}
 
 		checkSession()
 	}, [])
 
+
+
 	useEffect(() => {
+		console.log(user)
 		const getUserInfo = async () => {
-			if(user === {} || user._id == undefined) return
+			if(user === {} || user.uid == undefined ) return null
 			const userInfo = await axiosClient({
 				method:ROUTE_MAP.USER.GET.METHOD,
-				url:ROUTE_MAP.USER.GET.PATH + `/${user._id}`,
+				url:ROUTE_MAP.USER.GET.PATH + `/${user.uid}`,
 			})
 
 			if(userInfo.error) return alert(userInfo.message)
-			console.log(userInfo)
 			dispatch({type: 'SET_USER', user:userInfo.response.user})
 		}
 		getUserInfo()
-	},[user])
+	},[user.uid])
     
     return (
         <div className="inner-layout">

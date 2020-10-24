@@ -34,11 +34,6 @@ function LeftPanel() {
 	}
 
 	useEffect(() => {
-		console.log(needShowInfo)
-	}, [needShowInfo])
-
-	useEffect(() => {
-		console.log(needShowFindings)
 		if (!needShowFindings) return setReturnBar([])
 		resultBar(needShowFindings?.length)
 	}, [needShowFindings])

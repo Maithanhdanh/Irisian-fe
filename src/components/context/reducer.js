@@ -15,6 +15,7 @@ export const initialState = {
 	imageFindings: {},
 	needShowFindings: null,
 	detailUserInfo: {},
+	listFilterFindings:[],
 }
 
 const reducer = (state, action) => {
@@ -61,6 +62,12 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				imageList: action.imageList,
+			}
+
+		case "SET_FILTER_FINDINGS":
+			return {
+				...state,
+				listFilterFindings: new Set([...state.listFilterFindings, ...action.listFilterFindings]),
 			}
 
 		case "REMOVE_CURRENT_IMAGE":
