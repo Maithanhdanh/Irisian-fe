@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { Icon } from "semantic-ui-react"
-import { UploadImage } from "../../../../helpers/predictImage"
+import { UploadImage } from "../../../../helpers/image"
 import { useStateValue } from "../../../context/StateProvider"
 
 function DropZone() {

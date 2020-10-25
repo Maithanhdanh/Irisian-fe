@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import { useStateValue } from "../../../context/StateProvider"
 import "../../../css/DiseaseFilterPanel.css"
+import { DISEASE_LIST } from "../../../../config/vars"
 
 DiseaseFilterPanel.propTypes = {
 	setDiseaseFilter: PropTypes.func,
+	diseaseFilter: PropTypes.array
 }
 
 DiseaseFilterPanel.defaultProps = {
 	setDiseaseFilter: null,
+	diseaseFilter:[]
 }
 
-function DiseaseFilterPanel({ setDiseaseFilter }) {
-	const [{ listFilterFindings }, dispatch] = useStateValue()
-	const [listFilter, setListFilter] = useState([...listFilterFindings])
-	const [filterApply, setFilterApply] = useState([])
+function DiseaseFilterPanel({ diseaseFilter, setDiseaseFilter }) {
+	const [listFilter, setListFilter] = useState(DISEASE_LIST)
+	const [filterApply, setFilterApply] = useState(diseaseFilter)
 
 	const handleToggleFilter = async (e) => {
 		if (filterApply.indexOf(e.target.name) !== -1) {
@@ -33,7 +34,7 @@ function DiseaseFilterPanel({ setDiseaseFilter }) {
 		<div className="disease-filter">
 			{listFilter.map((finding, index) => (
 				<div className="ui toggle checkbox" key={index}>
-					<input type="checkbox" name={finding} onClick={handleToggleFilter} />
+					<input type="checkbox" name={finding} onChange={handleToggleFilter} checked={filterApply.includes(finding)?true:false}/>
 					<label>{finding}</label>
 				</div>
 			))}

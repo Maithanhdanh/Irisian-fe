@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import DiseaseFilterPanel from "./DiseaseFilterPanel"
-import useToggle from "./custom-hook/useToggle"
-import useOnClickOutside from "./custom-hook/useOutSideClick"
+import useToggle from "../custom-hook/useToggle"
+import useOnClickOutside from "../custom-hook/useOutSideClick"
 import PropTypes from "prop-types"
 
 DiseasePicker.propTypes = {
@@ -21,8 +21,7 @@ function DiseasePicker({ data, setData }) {
 	useOnClickOutside(ref, setShowDisease)
 
 	useEffect(() => {
-		console.log(diseaseFilter)
-		setData({ ...data, disease: diseaseFilter })
+		setData({ ...data, disease: [...diseaseFilter] })
 		if (diseaseFilter === []) {
 			document
 				.querySelector("button.disease-filter-popup")
@@ -44,7 +43,7 @@ function DiseasePicker({ data, setData }) {
 			</button>
 			{showDisease && (
 				<div className="" ref={ref}>
-					<DiseaseFilterPanel setDiseaseFilter={setDiseaseFilter} />
+					<DiseaseFilterPanel diseaseFilter={diseaseFilter} setDiseaseFilter={setDiseaseFilter} />
 				</div>
 			)}
 		</div>

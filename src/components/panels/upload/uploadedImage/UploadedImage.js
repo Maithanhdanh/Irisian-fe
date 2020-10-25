@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { useStateValue } from "../../../context/StateProvider"
-import handlePredictImage from "../../../../helpers/predictImage"
+import handlePredictImage from "../../../../helpers/image"
 import { NAVIGATE_DOMAIN } from "../../../../config/vars"
 import { RULE_FILTER_CHANGE } from "../../../../config/vars"
 

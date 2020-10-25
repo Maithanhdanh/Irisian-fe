@@ -1,4 +1,4 @@
-import axiosAuth from "../config/axiosAuth"
+import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
 
 export const getAccessTokenForAxios = () => {
@@ -10,7 +10,7 @@ export const getAccessTokenForAxios = () => {
 		const expiredToken = setTimeout(async () => {
 			try {
 				console.count("call get token")
-				const getToken = axiosAuth({
+				const getToken = axiosClient({
 					method: ROUTE_MAP.USER.TOKEN.METHOD,
 					url: ROUTE_MAP.USER.TOKEN.PATH,
 				})
@@ -19,10 +19,7 @@ export const getAccessTokenForAxios = () => {
 				const accessToken = getTokenData.response
 
 				storeToken(accessToken)
-				// localStorage.setItem("access_token", accessToken.accessToken)
-				// localStorage.setItem("access_token_expired", accessToken.expiresIn)
 
-				clearTimeout(expiredToken)
 				console.log(accessToken)
 				return accessToken.accessToken
 			} catch (e) {
@@ -32,7 +29,7 @@ export const getAccessTokenForAxios = () => {
 			}
 		}, 2000)
 	}
-	console.count("call return token")
+	console.count("OLD token")
 	return accessToken
 }
 
@@ -56,24 +53,25 @@ export const getAccessToken = async () => {
 	}
 
 	if (expiresIn <= Date.now()) {
-		const getToken = axiosAuth({
+		const getToken = axiosClient({
 			method: ROUTE_MAP.USER.TOKEN.METHOD,
 			url: ROUTE_MAP.USER.TOKEN.PATH,
 		})
 		const getTokenData = await getToken
 		if (getTokenData.error) return null
 		const accessToken = getTokenData.response
-
+		
 		storeToken(accessToken)
 
 		return accessToken.user
 	}
+	console.log(user)
 	return user
 }
 
 export const storeToken = (response) => {
-	console.log(response.response)
-	if(!response.response) return
+	if(!response.response) return null
+	console.log('store token')
 	response.response.accessToken &&
 		localStorage.setItem("access_token", response.response.accessToken)
 	response.response.expiresIn &&

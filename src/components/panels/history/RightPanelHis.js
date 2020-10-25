@@ -7,20 +7,57 @@ import "react-dates/initialize"
 import "react-dates/lib/css/_datepicker.css"
 import DatePicker from "./element/DatePicker"
 import DiseasePicker from "./element/DiseasePicker"
+import { searchImage } from "../../../helpers/image"
+import { DATE_FORMAT } from "../../../config/vars"
+import moment from "moment"
 
 const initialState = {
-	date: [],
+	date: [
+		moment().subtract(7, "day").format(DATE_FORMAT),
+		moment().format(DATE_FORMAT),
+	],
 	disease: [],
+	page: 1,
+	perPage: 10,
 }
 function RightPanelHis() {
-	const [{ user }, dispatch] = useStateValue()
+	const [{ user, userHistory }, dispatch] = useStateValue()
 	const [formData, setFormData] = useState(initialState)
 
 	useEffect(() => {
 		console.log(formData)
 	}, [formData])
 
-	
+	useEffect(() => {
+		try {
+			const getHistory = async () => {
+				const res = await searchImage()
+				dispatch({ type: "SET_USER_HISTORY", userHistory: res })
+			}
+
+			getHistory()
+		} catch (err) {
+			alert(`failed to user history deal to ${err}`)
+		}
+	}, [])
+
+	useEffect(() => {
+		console.log(userHistory)
+	}, [userHistory])
+
+	const handleSearch = async () => {
+		const res = await searchImage(formData)
+		dispatch({ type: "SET_USER_HISTORY", userHistory: res })
+	}
+	const handleClearFilter = async () => {
+		const res = await searchImage()
+		dispatch({ type: "SET_USER_HISTORY", userHistory: res })
+	}
+
+	const handleSelectHistory = (selectedHistory) => {
+		dispatch({ type: "SET_SELECTED_HISTORY", selectedHistory: selectedHistory })
+	}
+
 	return (
 		<div className="right-panel-his">
 			<h1>Recent</h1>
@@ -35,16 +72,18 @@ function RightPanelHis() {
 					<div className="filter-bar__button">
 						<DiseasePicker data={formData} setData={setFormData} />
 					</div>
-					<button>Find</button>
+					<button onClick={handleSearch}>Find</button>
+					<button onClick={handleClearFilter}>Clear</button>
 				</div>
 			</div>
 			<div className="history">
-				{user?.recent_activities?.map((activity, index) => (
+				{userHistory.map((image, index) => (
 					<HistoryCard
-						imageId={activity.imageId}
-						result={activity.result}
-						date={activity.date}
-						key={index}
+						imageId={image.imageId}
+						result={image.result}
+						date={image.date}
+						key={image.imageId}
+						onClick={() => handleSelectHistory(image.imageId)}
 					/>
 				))}
 			</div>

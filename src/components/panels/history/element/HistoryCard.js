@@ -7,7 +7,7 @@ import {
 	needShowFinding,
 	addColors,
 	sortObjectByValue,
-} from "../../../../helpers/predictImage"
+} from "../../../../helpers/image"
 import { createSequence } from "../../../../helpers/sequence"
 import { useStateValue } from "../../../context/StateProvider"
 
@@ -21,15 +21,19 @@ HistoryCard.propTypes = {
 HistoryCard.defaultProps = {
 	imageId: "",
 	result: {},
-	date:"",
-	getListHistory:null,
+	date: "",
+	getListHistory: null,
 }
 
-function HistoryCard({imageId, result, date}) {
-	const [{listFilterFindings}, dispatch] = useStateValue()
-	const [info, setInfo] = useState(needShowingInfo(result?.info? result.info:{}))
+function HistoryCard({ imageId, result, date }) {
+	const [{}, dispatch] = useStateValue()
+	const [info, setInfo] = useState(
+		needShowingInfo(result?.info ? result.info : {})
+	)
 	const [findings, setFindings] = useState(
-		needShowFinding(addColors(sortObjectByValue(result?.findings? result.findings : {})))
+		needShowFinding(
+			addColors(sortObjectByValue(result?.findings ? result.findings : {}))
+		)
 	)
 	const [returnItems, setReturnItems] = useState([])
 
@@ -37,7 +41,7 @@ function HistoryCard({imageId, result, date}) {
 		var NUM_BAR = createSequence(findingsLength)
 		setReturnItems(
 			NUM_BAR.map((num, index) => (
-				<div className="card__info__content__findings__detail" key ={index}>
+				<div className="card__info__content__findings__detail" key={index}>
 					<span>{findings[index][0].split(", ")[0]}</span>
 					<a
 						className="ui label"
@@ -52,7 +56,6 @@ function HistoryCard({imageId, result, date}) {
 	useEffect(() => {
 		if (!findings) return setReturnItems([])
 		resultBar(findings?.length)
-		dispatch({ type:"SET_FILTER_FINDINGS", listFilterFindings: findings.map(finding=>finding[0])})
 	}, [findings])
 
 	return (
@@ -69,7 +72,10 @@ function HistoryCard({imageId, result, date}) {
 							{info?.map(
 								(item, index) =>
 									item === "eye_side" && (
-										<div className="card__info__content__info__detail" key={index}>
+										<div
+											className="card__info__content__info__detail"
+											key={index}
+										>
 											<span>EYESIDE:</span>
 											<a className="ui label">{result?.info?.[item]}</a>
 										</div>
@@ -84,9 +90,7 @@ function HistoryCard({imageId, result, date}) {
 					<h3>NOT PREDICTED YET</h3>
 				)}
 			</div>
-			<div className="card__footer">
-				Update at {date}
-			</div>
+			<div className="card__footer">Update at {date}</div>
 		</div>
 	)
 }

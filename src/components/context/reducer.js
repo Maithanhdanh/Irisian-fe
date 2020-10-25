@@ -15,7 +15,9 @@ export const initialState = {
 	imageFindings: {},
 	needShowFindings: null,
 	detailUserInfo: {},
-	listFilterFindings:[],
+
+	userHistory: [],
+	selectedHistory:"232f82d4-14e1-11eb-8109-0242ac140005.jpg",
 }
 
 const reducer = (state, action) => {
@@ -64,10 +66,16 @@ const reducer = (state, action) => {
 				imageList: action.imageList,
 			}
 
-		case "SET_FILTER_FINDINGS":
+		case "SET_USER_HISTORY":
 			return {
 				...state,
-				listFilterFindings: new Set([...state.listFilterFindings, ...action.listFilterFindings]),
+				userHistory: action.userHistory,
+			}
+
+		case "SET_SELECTED_HISTORY":
+			return {
+				...state,
+				selectedHistory: action.selectedHistory,
 			}
 
 		case "REMOVE_CURRENT_IMAGE":

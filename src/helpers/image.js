@@ -1,6 +1,8 @@
 import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
 import { COLOR_PROCESS_BAR, RESULT_THRESHOLD_LEVELS } from "../config/vars"
+import queryString from "query-string"
+import {INITIAL_SEARCH_IMAGE} from '../config/vars'
 
 export const UploadImage = async (file) => {
 	try {
@@ -134,6 +136,23 @@ const handlePredictImage = async (imageId, dispatch) => {
 		imageFindings: addedColors,
 		needShowFindings: selectedFindings,
 	})
+}
+
+export const searchImage = async(data=INITIAL_SEARCH_IMAGE) => {
+	try{
+
+		const query = queryString.stringify(data)
+		console.log(query)
+		const response = await axiosClient({
+			method: ROUTE_MAP.IMAGE.GETLIST.METHOD,
+			url: ROUTE_MAP.IMAGE.GETLIST.PATH + `?${query}`,
+		})
+		
+		if(response.error) throw new Error(response.response)
+		return response.response
+	} catch (e) {
+		alert(e.message)
+	}
 }
 
 export default handlePredictImage

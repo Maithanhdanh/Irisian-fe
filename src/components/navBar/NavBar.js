@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import axiosAuth from "../../config/axiosAuth"
 import { useStateValue } from "../context/StateProvider"
 import ROUTE_MAP from "../../config/urlBase"
 import "../css/NavBar.css"
+import axiosClient from "../../config/axiosClient"
 
 function NavBar() {
 	const history = useHistory()
@@ -23,7 +23,7 @@ function NavBar() {
 	}, [location])
 	const handleLogout = async () => {
 		try {
-			await axiosAuth({
+			await axiosClient({
 				method: ROUTE_MAP.USER.LOGOUT.METHOD,
 				url: ROUTE_MAP.USER.LOGOUT.PATH,
 			})

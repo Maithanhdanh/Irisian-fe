@@ -15,7 +15,9 @@ function LeftPanelHis() {
 	const [showError, setShowError] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
 	const [formData, setFormData] = useState(initialState)
+	
 	useEffect(() => {
+		console.log(user)
 		setFormData({ name: user.name, email: user.email })
 	}, [user])
 
@@ -76,7 +78,7 @@ function LeftPanelHis() {
 							onChange={handleOnChange}
 						/>
 					) : (
-						<span>{formData?.name}</span>
+						<span>{user?.name}</span>
 					)}
 				</div>
 				<div className="ui labeled input">
@@ -90,7 +92,7 @@ function LeftPanelHis() {
 							onChange={handleOnChange}
 						/>
 					) : (
-						<span>{formData?.email}</span>
+						<span>{user?.email}</span>
 					)}
 				</div>
 			</div>

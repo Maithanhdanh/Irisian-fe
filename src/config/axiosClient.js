@@ -1,6 +1,7 @@
 import axios from "axios"
 import queryString from "query-string"
 import { getAccessTokenForAxios, storeToken } from "../helpers/token"
+import ROUTE_MAP from "./urlBase"
 import {NAVIGATE_DOMAIN} from "./vars"
 
 const axiosClient = axios.create({
@@ -27,7 +28,11 @@ axiosClient.interceptors.request.use(async (config) => {
 axiosClient.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {
-			storeToken(response.data)
+			console.log(ROUTE_MAP.USER.TOKEN.PATH)
+			if(response.config.url === ROUTE_MAP.USER.LOGIN.PATH || response.config.url === ROUTE_MAP.USER.TOKEN.PATH){
+				console.log('set token')
+				storeToken(response.data)
+			}
 			return response.data
 		}
 

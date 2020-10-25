@@ -10,7 +10,7 @@
   margin: 0;
 }
 .right-panel-his .header {
-  padding: 0 10px;
+  padding: 0 40px;
   align-items: center;
   display: flex;
   height: 8%;
@@ -24,12 +24,12 @@
   color: #000;
   font-size: 20px;
   font-weight: 800;
-  margin-left: 50px;
+  margin-left: -5px;
 }
 .right-panel-his .header .filter-bar {
-  margin: auto;
   display: flex;
   gap: 20px;
+  width: 100%;
 }
 .right-panel-his .header .filter-bar .input {
   opacity: 0.5;
@@ -43,11 +43,21 @@
 .right-panel-his .header .filter-bar button {
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: #00B5AD;
+  background-color: #00b5ad;
   border-color: teal;
+}
+.right-panel-his .header .filter-bar button:nth-last-child(2) {
+  margin-left: auto;
+}
+.right-panel-his .header .filter-bar > button:last-child {
+  background-color: #ff6666;
+  border-color: #ff4d4d;
 }
 .right-panel-his .header .filter-bar__button {
   position: relative;
+}
+.right-panel-his .header .filter-bar__button:first-child {
+  margin-left: auto;
 }
 .right-panel-his .header .filter-bar__button__choice {
   margin-top: 5px;
@@ -58,7 +68,7 @@
   background-color: #fff;
 }
 .right-panel-his .header .filter-bar__button .selected_disease {
-  background-color: #00B5AD;
+  background-color: #00b5ad;
 }
 .right-panel-his .history {
   display: flex;
