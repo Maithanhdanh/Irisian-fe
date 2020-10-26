@@ -2,30 +2,43 @@ import React, { useEffect, useState } from "react"
 import { useStateValue } from "../../context/StateProvider"
 import "../../css/LeftPanel.css"
 import { createSequence } from "../../../helpers/sequence"
+import PropTypes from "prop-types"
+import { preProcessImageFindings } from "../../../helpers/image"
 
-function LeftPanel() {
+LeftPanel.propTypes = {
+	type: PropTypes.string
+}
+
+LeftPanel.defaultProps = {
+	type:null
+}
+
+function LeftPanel({type}) {
 	const [
-		{ currImage, needShowInfo, imageInfo, needShowFindings },
+		{ currImage, needShowInfo, imageInfo, needShowFindings, selectedHistory},
 	] = useStateValue()
+	if(!type){
+	}
 
 	const [returnBar, setReturnBar] = useState([])
 
-	const resultBar = (findingsLength) => {
+	const resultBar = (findingsLength, findings = needShowFindings) => {
+		console.log(findingsLength, findings)
 		var NUM_BAR = createSequence(findingsLength)
 		setReturnBar(NUM_BAR.map((num, index) => (
 			<div className="results__graph__process" key={index}>
 				<div className="results__graph__process__title">
-					<label >{needShowFindings[index][0].split(", ")[0]}</label>
+					<label >{findings[index][0].split(", ")[0]}</label>
 					<label >
-						{(needShowFindings[index][1] * 100).toFixed(2)}%
+						{(findings[index][1] * 100).toFixed(2)}%
 					</label>
 				</div>
 				<div className="results__graph__process__bar">
 					<div
 						className="results__graph__process__bar__inner"
 						style={{
-							width: `${needShowFindings[index][1] * 100}%`,
-							backgroundColor: needShowFindings[index][2],
+							width: `${findings[index][1] * 100}%`,
+							backgroundColor: findings[index][2],
 						}}
 					></div>
 				</div>
@@ -34,9 +47,20 @@ function LeftPanel() {
 	}
 
 	useEffect(() => {
-		if (!needShowFindings) return setReturnBar([])
-		resultBar(needShowFindings?.length)
-	}, [needShowFindings])
+		console.log('left patient: ',type)
+		if(type !== 'review'){
+			if (!needShowFindings) return setReturnBar([])
+			resultBar(needShowFindings?.length)
+		} else {
+			if (!selectedHistory) return null
+			const reviewImage = preProcessImageFindings(selectedHistory.result.findings)
+			resultBar(reviewImage.length, reviewImage)
+		}
+	}, [needShowFindings,type])
+
+	useEffect(() => {
+		console.log(returnBar)
+	},[returnBar])
 
 	return (
 		<div className="left-panel">

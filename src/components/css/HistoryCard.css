@@ -24,7 +24,8 @@
   margin-bottom: 8%;
   height: 100%;
 }
-.history-card .card__info span, .history-card .card__info h2 {
+.history-card .card__info span,
+.history-card .card__info h2 {
   color: #000;
 }
 .history-card .card__info__content {
@@ -54,6 +55,9 @@
   text-align: center;
   align-self: center;
 }
+.history-card .card__info__content__findings {
+  margin: auto;
+}
 .history-card .card__footer {
   box-sizing: border-box;
   padding-left: 10px;
@@ -62,7 +66,16 @@
   right: 0;
   left: 0;
   bottom: 0;
-  border-top: 1px solid #CACBCD;
+  border-top: 1px solid #cacbcd;
+}
+
+@media (max-width: 1050px) {
+  .card__info__content {
+    font-size: 12px !important;
+  }
+  .card__info__content__info__detail a, .card__info__content__findings__detail a {
+    font-size: 12px !important;
+  }
 }
 
 /*# sourceMappingURL=HistoryCard.css.map */

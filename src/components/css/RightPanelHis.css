@@ -17,7 +17,6 @@
   width: 100%;
   margin-bottom: 2em;
   background-color: #E8E8E8;
-  box-shadow: 0, 0, 0.15, rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 .right-panel-his .header__title {
@@ -54,6 +53,7 @@
   border-color: #ff4d4d;
 }
 .right-panel-his .header .filter-bar__button {
+  place-self: center;
   position: relative;
 }
 .right-panel-his .header .filter-bar__button:first-child {
@@ -94,6 +94,12 @@
 }
 .right-panel-his .history::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+@media (max-width: 1050px) {
+  .header {
+    padding: 0 1em !important;
+  }
 }
 
 /*# sourceMappingURL=RightPanelHis.css.map */

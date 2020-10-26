@@ -1,5 +1,6 @@
 @import './Config.scss';
 .App {
+	min-width: 1040px;
 	width: 100vw;
 	height: 100vh;
 	background: #085078; /* fallback for old browsers */

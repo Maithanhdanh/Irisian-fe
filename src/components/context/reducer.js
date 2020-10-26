@@ -17,9 +17,9 @@ export const initialState = {
 	detailUserInfo: {},
 
 	userHistory: [],
-	selectedHistory:"232f82d4-14e1-11eb-8109-0242ac140005.jpg",
+	selectedHistory:null,
 }
-
+// "232f82d4-14e1-11eb-8109-0242ac140005.jpg"
 const reducer = (state, action) => {
 	switch (action.type) {
 		case "SET_USER":
@@ -75,7 +75,7 @@ const reducer = (state, action) => {
 		case "SET_SELECTED_HISTORY":
 			return {
 				...state,
-				selectedHistory: action.selectedHistory,
+				selectedHistory: state.userHistory.find(his => his.imageId === action.selectedHistory),
 			}
 
 		case "REMOVE_CURRENT_IMAGE":

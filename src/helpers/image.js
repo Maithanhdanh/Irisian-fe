@@ -126,10 +126,9 @@ const handlePredictImage = async (imageId, dispatch) => {
 	})
 
 	const imageFindings = await getImageFindings(imageId)
-	console.log(imageFindings)
 	const sortedImageFindings = sortObjectByValue(imageFindings)
 	const addedColors = addColors(sortedImageFindings)
-	const selectedFindings = needShowFinding(sortedImageFindings)
+	const selectedFindings = needShowFinding(addedColors)
 
 	dispatch({
 		type: "SET_FINDING_IMAGE",
@@ -137,6 +136,14 @@ const handlePredictImage = async (imageId, dispatch) => {
 		needShowFindings: selectedFindings,
 	})
 }
+
+export const preProcessImageFindings = (imageFindings) => {
+	const sortedImageFindings = sortObjectByValue(imageFindings)
+	const addedColors = addColors(sortedImageFindings)
+	const selectedFindings = needShowFinding(addedColors)
+
+	return selectedFindings
+}	
 
 export const searchImage = async(data=INITIAL_SEARCH_IMAGE) => {
 	try{

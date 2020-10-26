@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import DiseaseFilterPanel from "./DiseaseFilterPanel"
-import useToggle from "../custom-hook/useToggle"
-import useOnClickOutside from "../custom-hook/useOutSideClick"
+import useToggle from "../../../../custom-hook/useToggle"
+import useOnClickOutside from "../../../../custom-hook/useOutSideClick"
 import PropTypes from "prop-types"
 
 DiseasePicker.propTypes = {

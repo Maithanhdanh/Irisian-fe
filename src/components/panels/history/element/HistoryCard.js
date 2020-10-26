@@ -15,17 +15,17 @@ HistoryCard.propTypes = {
 	imageId: PropTypes.string,
 	result: PropTypes.object,
 	date: PropTypes.string,
-	getListHistory: PropTypes.func,
+	settShowReviewHistory: PropTypes.func,
 }
 
 HistoryCard.defaultProps = {
 	imageId: "",
 	result: {},
 	date: "",
-	getListHistory: null,
+	settShowReviewHistory: null,
 }
 
-function HistoryCard({ imageId, result, date }) {
+function HistoryCard({ imageId, result, date, settShowReviewHistory }) {
 	const [{}, dispatch] = useStateValue()
 	const [info, setInfo] = useState(
 		needShowingInfo(result?.info ? result.info : {})
@@ -58,8 +58,14 @@ function HistoryCard({ imageId, result, date }) {
 		resultBar(findings?.length)
 	}, [findings])
 
+	
+	const handleSelectHistory = (imageId) => {
+		settShowReviewHistory(true)
+		dispatch({ type: "SET_SELECTED_HISTORY", selectedHistory: imageId })
+	}
+
 	return (
-		<div className="history-card">
+		<div className="history-card" onClick={() => handleSelectHistory(imageId)}>
 			<img
 				className="card__image"
 				src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/image/${imageId}`}

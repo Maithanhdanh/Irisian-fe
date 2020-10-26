@@ -10,6 +10,14 @@ import DiseasePicker from "./element/DiseasePicker"
 import { searchImage } from "../../../helpers/image"
 import { DATE_FORMAT } from "../../../config/vars"
 import moment from "moment"
+import PropTypes from "prop-types"
+
+RightPanelHis.propTypes = {
+	settShowReviewHistory: PropTypes.func
+}
+RightPanelHis.defaultProps = {
+	settShowReviewHistory:null
+}
 
 const initialState = {
 	date: [
@@ -20,7 +28,7 @@ const initialState = {
 	page: 1,
 	perPage: 10,
 }
-function RightPanelHis() {
+function RightPanelHis({settShowReviewHistory}) {
 	const [{ user, userHistory }, dispatch] = useStateValue()
 	const [formData, setFormData] = useState(initialState)
 
@@ -54,10 +62,6 @@ function RightPanelHis() {
 		dispatch({ type: "SET_USER_HISTORY", userHistory: res })
 	}
 
-	const handleSelectHistory = (selectedHistory) => {
-		dispatch({ type: "SET_SELECTED_HISTORY", selectedHistory: selectedHistory })
-	}
-
 	return (
 		<div className="right-panel-his">
 			<h1>Recent</h1>
@@ -77,13 +81,13 @@ function RightPanelHis() {
 				</div>
 			</div>
 			<div className="history">
-				{userHistory.map((image, index) => (
+				{userHistory.map((image) => (
 					<HistoryCard
 						imageId={image.imageId}
 						result={image.result}
 						date={image.date}
 						key={image.imageId}
-						onClick={() => handleSelectHistory(image.imageId)}
+						settShowReviewHistory={settShowReviewHistory}
 					/>
 				))}
 			</div>

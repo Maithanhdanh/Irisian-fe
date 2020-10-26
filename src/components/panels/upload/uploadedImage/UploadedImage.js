@@ -6,14 +6,15 @@ import { NAVIGATE_DOMAIN } from "../../../../config/vars"
 import { RULE_FILTER_CHANGE } from "../../../../config/vars"
 
 UploadedImage.propTypes = {
-	file: PropTypes.object,
+	type: PropTypes.string,
 }
 UploadedImage.defaultProps = {
-	file: {},
+	type: null,
 }
 
-function UploadedImage() {
-	const [{ uploadedImage }, dispatch] = useStateValue()
+function UploadedImage({type}) {
+	const [{ uploadedImage, selectedHistory }, dispatch] = useStateValue()
+	const [showImage, setShowimage] = useState(type==='review'? selectedHistory:uploadedImage)
 	const [brightness, setBrightness] = useState(
 		RULE_FILTER_CHANGE.BRIGHTNESS.INIT
 	)
@@ -43,8 +44,8 @@ function UploadedImage() {
 	const roundNum = (num) => Math.round(num * 10) / 10
 
 	useEffect(() => {
-		console.log(imgStyle)
-	}, [imgStyle])
+		console.log(showImage)
+	}, [showImage])
 
 	const handleClear = () => {
 		dispatch({ type: "REMOVE_CURRENT_IMAGE" })
@@ -139,22 +140,26 @@ function UploadedImage() {
 					</div>
 				</div>
 			</div>
-			<div className="thumb" key={uploadedImage.noBackgroundImageId}>
+			<div className="thumb" key={showImage.noBackgroundImageId}>
 				<div className="thumbInner">
 					<img
-						src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/image/${uploadedImage.noBackgroundImageId}`}
+						src={`${NAVIGATE_DOMAIN.MACHINE_LEARNING}/image/${showImage?.noBackgroundImageId}`}
 						alt="preview"
 						style={imgStyle}
 					/>
 				</div>
 			</div>
 			<div className="nav__buttons">
-				<button className="ui negative button" onClick={handleClear}>
-					Discard
-				</button>
-				<button className="ui primary button" onClick={handlePrediction}>
-					Submit
-				</button>
+				{!type && (
+					<>
+					<button className="ui negative button" onClick={handleClear}>
+						Discard
+					</button>
+					<button className="ui primary button" onClick={handlePrediction}>
+						Submit
+					</button>
+					</>
+				)}
 			</div>
 		</div>
 	)

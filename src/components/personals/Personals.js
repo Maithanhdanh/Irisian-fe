@@ -1,40 +1,48 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
-import { getAccessToken } from '../../helpers/token'
-import { useStateValue } from '../context/StateProvider'
-import '../css/InnerLayout.css'
-import NavBar from '../navBar/NavBar'
-import LeftPanelHis from '../panels/history/LeftPanelHis'
-import RightPanelHis from '../panels/history/RightPanelHis'
-import ReviewHistory from '../reviewHistory/ReviewHistory'
+import React, { useEffect, useRef, useState } from "react"
+import { useHistory } from "react-router-dom"
+import useOnClickOutside from "../../custom-hook/useOutSideClick"
+import { getAccessToken } from "../../helpers/token"
+import { useStateValue } from "../context/StateProvider"
+import "../css/InnerLayout.css"
+import NavBar from "../navBar/NavBar"
+import LeftPanelHis from "../panels/history/LeftPanelHis"
+import RightPanelHis from "../panels/history/RightPanelHis"
+import ReviewHistory from "../reviewHistory/ReviewHistory"
 
 function Personals() {
-    const [{selectedHistory}, dispatch] = useStateValue()
+	const ref = useRef()
+	const [{ selectedHistory }, dispatch] = useStateValue()
+	const [showReviewHistory, settShowReviewHistory] = useState(false)
 	const history = useHistory()
 	useEffect(() => {
-		console.count('personals')
-		try{
+		console.count("personals")
+		try {
 			const checkSession = async () => {
 				const token = await getAccessToken()
 				console.log(token)
-				if(token == null) return history.push("/login")
+				if (token == null) return history.push("/login")
 				dispatch({ type: "SET_USER", user: token })
 			}
-	
+
 			checkSession()
 		} catch (e) {
 			alert(e.message)
 		}
 	}, [])
-    
-    return (
-        <div className="inner-layout">
+
+	
+
+	return (
+		<div className="inner-layout">
 			<NavBar className="navbar" />
 			<LeftPanelHis className="left-panel-his" />
-			<RightPanelHis className="right-panel-his" />
-			{selectedHistory!== null && <ReviewHistory/>}
+			<RightPanelHis
+				className="right-panel-his"
+				settShowReviewHistory={settShowReviewHistory}
+			/>
+			{showReviewHistory && <ReviewHistory settShowReviewHistory={settShowReviewHistory}/>}
 		</div>
-    )
+	)
 }
 
 export default Personals
