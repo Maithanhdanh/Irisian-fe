@@ -17,7 +17,6 @@ function LeftPanelHis() {
 	const [formData, setFormData] = useState(initialState)
 	
 	useEffect(() => {
-		console.log(user)
 		setFormData({ name: user.name, email: user.email })
 	}, [user])
 

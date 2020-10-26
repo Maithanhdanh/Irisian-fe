@@ -26,7 +26,6 @@ function LeftPanel({ type }) {
 	const [returnBar, setReturnBar] = useState([])
 
 	const resultBar = (findingsLength, findings = needShowFindings) => {
-		console.log(findingsLength, findings)
 		var NUM_BAR = createSequence(findingsLength)
 		setReturnBar(
 			NUM_BAR.map((num, index) => (
@@ -50,7 +49,6 @@ function LeftPanel({ type }) {
 	}
 
 	useEffect(() => {
-		console.log("left patient: ", type)
 		if (type !== "review") {
 			if (!needShowFindings) return setReturnBar([])
 			resultBar(needShowFindings?.length)
@@ -64,9 +62,9 @@ function LeftPanel({ type }) {
 		}
 	}, [needShowFindings, type])
 
-	useEffect(() => {
-		console.log(selectedImageInfo)
-	}, [selectedImageInfo])
+	// useEffect(() => {
+	// 	console.log(selectedImageInfo)
+	// }, [selectedImageInfo])
 
 	return (
 		<div className="left-panel">

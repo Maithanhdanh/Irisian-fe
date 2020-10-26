@@ -28,14 +28,12 @@ function UploadedImage({type}) {
 		setGrayscale(RULE_FILTER_CHANGE.GRAYSCALE.INIT)
 	}
 	const checkChange = (type, change) => {
-		console.log(RULE_FILTER_CHANGE[type]?.LOW, RULE_FILTER_CHANGE[type]?.UP)
 		if (RULE_FILTER_CHANGE[type]?.LOW == null && RULE_FILTER_CHANGE[type]?.UP == null)
 			return roundNum(change)
-
-			console.log(change, RULE_FILTER_CHANGE[type]?.LOW, change < RULE_FILTER_CHANGE[type]?.LOW)
+			
 		if (RULE_FILTER_CHANGE[type]?.LOW != null && change < RULE_FILTER_CHANGE[type]?.LOW)
 			return RULE_FILTER_CHANGE[type].LOW
-			console.log(change, RULE_FILTER_CHANGE[type]?.UP, change > RULE_FILTER_CHANGE[type]?.UP)
+			
 		if (RULE_FILTER_CHANGE[type]?.UP != null&& change > RULE_FILTER_CHANGE[type]?.UP)
 			return RULE_FILTER_CHANGE[type].UP
 
@@ -43,9 +41,9 @@ function UploadedImage({type}) {
 	}
 	const roundNum = (num) => Math.round(num * 10) / 10
 
-	useEffect(() => {
-		console.log(showImage)
-	}, [showImage])
+	// useEffect(() => {
+	// 	console.log(showImage)
+	// }, [showImage])
 
 	const handleClear = () => {
 		dispatch({ type: "REMOVE_CURRENT_IMAGE" })

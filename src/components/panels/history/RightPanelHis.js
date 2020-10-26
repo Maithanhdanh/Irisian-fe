@@ -37,10 +37,6 @@ function RightPanelHis({ setShowReviewHistory }) {
 	const [formData, setFormData] = useState(initialState)
 
 	useEffect(() => {
-		console.log(formData)
-	}, [formData])
-
-	useEffect(() => {
 		try {
 			const getHistory = async () => {
 				const res = await searchImage()
@@ -53,12 +49,11 @@ function RightPanelHis({ setShowReviewHistory }) {
 		}
 	}, [])
 
-	useEffect(() => {
-		console.log(userHistory)
-	}, [userHistory])
+	// useEffect(() => {
+	// 	console.log(userHistory)
+	// }, [userHistory])
 
 	const setDataAfterSearch = (res) => {
-		console.log(res)
 		dispatch({
 			type: "SET_CURRENT_SEARCH_PAGE",
 			nextSearchPage: res.nextPage,

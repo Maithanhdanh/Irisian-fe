@@ -29,7 +29,6 @@ axiosClient.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {
 			if(response.config.url === ROUTE_MAP.USER.LOGIN.PATH || response.config.url === ROUTE_MAP.USER.TOKEN.PATH){
-				console.log('set token')
 				storeToken(response.data)
 			}
 			return response.data

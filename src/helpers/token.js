@@ -20,12 +20,10 @@ export const getAccessTokenForAxios = () => {
 
 				storeToken(accessToken)
 
-				console.log(accessToken)
 				return accessToken.accessToken
 			} catch (e) {
 				console.count("error")
 				clearTimeout(expiredToken)
-				console.log(e)
 			}
 		}, 2000)
 	}
