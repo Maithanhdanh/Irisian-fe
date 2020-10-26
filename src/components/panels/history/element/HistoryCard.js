@@ -15,17 +15,17 @@ HistoryCard.propTypes = {
 	imageId: PropTypes.string,
 	result: PropTypes.object,
 	date: PropTypes.string,
-	settShowReviewHistory: PropTypes.func,
+	setShowReviewHistory: PropTypes.func,
 }
 
 HistoryCard.defaultProps = {
 	imageId: "",
 	result: {},
 	date: "",
-	settShowReviewHistory: null,
+	setShowReviewHistory: null,
 }
 
-function HistoryCard({ imageId, result, date, settShowReviewHistory }) {
+function HistoryCard({ imageId, result, date, setShowReviewHistory }) {
 	const [{}, dispatch] = useStateValue()
 	const [info, setInfo] = useState(
 		needShowingInfo(result?.info ? result.info : {})
@@ -60,7 +60,7 @@ function HistoryCard({ imageId, result, date, settShowReviewHistory }) {
 
 	
 	const handleSelectHistory = (imageId) => {
-		settShowReviewHistory(true)
+		setShowReviewHistory(true)
 		dispatch({ type: "SET_SELECTED_HISTORY", selectedHistory: imageId })
 	}
 

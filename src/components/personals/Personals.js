@@ -10,16 +10,13 @@ import RightPanelHis from "../panels/history/RightPanelHis"
 import ReviewHistory from "../reviewHistory/ReviewHistory"
 
 function Personals() {
-	const ref = useRef()
-	const [{ selectedHistory }, dispatch] = useStateValue()
-	const [showReviewHistory, settShowReviewHistory] = useState(false)
+	const [{}, dispatch] = useStateValue()
+	const [showReviewHistory, setShowReviewHistory] = useState(false)
 	const history = useHistory()
 	useEffect(() => {
-		console.count("personals")
 		try {
 			const checkSession = async () => {
 				const token = await getAccessToken()
-				console.log(token)
 				if (token == null) return history.push("/login")
 				dispatch({ type: "SET_USER", user: token })
 			}
@@ -38,9 +35,9 @@ function Personals() {
 			<LeftPanelHis className="left-panel-his" />
 			<RightPanelHis
 				className="right-panel-his"
-				settShowReviewHistory={settShowReviewHistory}
+				setShowReviewHistory={setShowReviewHistory}
 			/>
-			{showReviewHistory && <ReviewHistory settShowReviewHistory={settShowReviewHistory}/>}
+			{showReviewHistory && <ReviewHistory setShowReviewHistory={setShowReviewHistory}/>}
 		</div>
 	)
 }

@@ -2,11 +2,10 @@ import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
 import { COLOR_PROCESS_BAR, RESULT_THRESHOLD_LEVELS } from "../config/vars"
 import queryString from "query-string"
-import {INITIAL_SEARCH_IMAGE} from '../config/vars'
+import { INITIAL_SEARCH_IMAGE } from "../config/vars"
 
 export const UploadImage = async (file) => {
 	try {
-
 		var formData = new FormData()
 		formData.append("file", file)
 
@@ -17,7 +16,7 @@ export const UploadImage = async (file) => {
 			headers: { "Content-Type": "multipart/form-data" },
 		})
 
-		if(response.error) alert(`[UPLOAD IMAGE] failed`)
+		if (response.error) alert(`[UPLOAD IMAGE] failed`)
 		return response.response.data
 	} catch (e) {
 		alert(`[UPLOAD IMAGE] ${e}`)
@@ -31,7 +30,7 @@ const getImageInfo = async (imageId) => {
 			url: ROUTE_MAP.IMAGE.INFO.PATH + `/${imageId}`,
 		})
 
-		if(response.error) alert(`[PREDICT IMAGE] failed`)
+		if (response.error) alert(`[PREDICT IMAGE] failed`)
 		return response.response.data
 	} catch (e) {
 		alert(`[PREDICT IMAGE] ${e}`)
@@ -45,7 +44,7 @@ const getImageFindings = async (imageId) => {
 			url: ROUTE_MAP.IMAGE.FINDING.PATH + `/${imageId}`,
 		})
 
-		if(response.error) alert(`[FINDING IMAGE] failed`)
+		if (response.error) alert(`[FINDING IMAGE] failed`)
 		return response.response.data
 	} catch (e) {
 		alert(`[FINDING IMAGE] ${e}`)
@@ -74,7 +73,7 @@ export const needShowFinding = (imageFindings) => {
 export const addColors = (findings) => {
 	const addedColors = []
 	findings.forEach((finding, index) => {
-		if(finding[0] !== 'normal') {
+		if (finding[0] !== "normal") {
 			if (finding[1] >= 0.8) {
 				finding.push(COLOR_PROCESS_BAR.HIGH)
 			} else if (finding[1] >= 0.7) {
@@ -117,7 +116,6 @@ const handlePredictImage = async (imageId, dispatch) => {
 	imageId = imageId.replace("/image/", "")
 
 	const imageInfo = await getImageInfo(imageId)
-	console.log(imageInfo)
 	const selectedInfo = needShowingInfo(imageInfo)
 	dispatch({
 		type: "SET_INFO_IMAGE",
@@ -143,20 +141,24 @@ export const preProcessImageFindings = (imageFindings) => {
 	const selectedFindings = needShowFinding(addedColors)
 
 	return selectedFindings
-}	
+}
 
-export const searchImage = async(data=INITIAL_SEARCH_IMAGE) => {
-	try{
-
-		const query = queryString.stringify(data)
-		console.log(query)
+export const searchImage = async (
+	data = INITIAL_SEARCH_IMAGE,
+	nextSearchPage = 1
+	
+) => {
+	try {
+		const searchDate = { ...data, page: nextSearchPage }
+		const query = queryString.stringify(searchDate)
 		const response = await axiosClient({
 			method: ROUTE_MAP.IMAGE.GETLIST.METHOD,
 			url: ROUTE_MAP.IMAGE.GETLIST.PATH + `?${query}`,
 		})
-		
-		if(response.error) throw new Error(response.response)
+
+		if (response.error) throw new Error(response.response)
 		return response.response
+		
 	} catch (e) {
 		alert(e.message)
 	}

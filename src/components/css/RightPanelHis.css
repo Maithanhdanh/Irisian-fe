@@ -64,12 +64,6 @@
   position: absolute;
   z-index: 100;
 }
-.right-panel-his .header .filter-bar__button .normal_disease {
-  background-color: #fff;
-}
-.right-panel-his .header .filter-bar__button .selected_disease {
-  background-color: #00b5ad;
-}
 .right-panel-his .history {
   display: flex;
   flex-direction: row;

@@ -1,4 +1,4 @@
-import moment from 'moment'
+import moment from "moment"
 if (process.env.REACT_ENV !== "production") {
 	require("dotenv").config()
 }
@@ -38,9 +38,9 @@ export const DISEASE_LIST = [
 	"Signs of retinal thinning",
 ]
 export const DATE_FORMAT = "MM/DD/YYYY"
-export const INITIAL_SEARCH_IMAGE= {
-	page:1, perPage:10, disease:[],date: [
-		moment().subtract(7, "days").format('l'),
-		moment().format('l'),
-	],
+export const INITIAL_SEARCH_IMAGE = {
+	page: 1,
+	perPage: 10,
+	disease: [],
+	date: [moment().subtract(7, "days").format("l"), moment().format("l")],
 }

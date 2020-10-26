@@ -7,17 +7,17 @@ import RightPanel from "../panels/upload/RightPanel"
 import PropTypes from "prop-types"
 
 ReviewHistory.propTypes = {
-	settShowReviewHistory: PropTypes.func
+	setShowReviewHistory: PropTypes.func
 }
 ReviewHistory.defaultProps = {
-	settShowReviewHistory:null
+	setShowReviewHistory:null
 }
 
-function ReviewHistory({settShowReviewHistory}) {
+function ReviewHistory({setShowReviewHistory}) {
     const ref = useRef()
     const [{},dispatch] = useStateValue()
 
-    useOnClickOutside(ref, () => settShowReviewHistory(false))
+    useOnClickOutside(ref, () => setShowReviewHistory(false))
     
     return (
         <div className="review-history">

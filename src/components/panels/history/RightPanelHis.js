@@ -13,10 +13,10 @@ import moment from "moment"
 import PropTypes from "prop-types"
 
 RightPanelHis.propTypes = {
-	settShowReviewHistory: PropTypes.func
+	setShowReviewHistory: PropTypes.func,
 }
 RightPanelHis.defaultProps = {
-	settShowReviewHistory:null
+	setShowReviewHistory: null,
 }
 
 const initialState = {
@@ -28,8 +28,12 @@ const initialState = {
 	page: 1,
 	perPage: 10,
 }
-function RightPanelHis({settShowReviewHistory}) {
-	const [{ user, userHistory }, dispatch] = useStateValue()
+function RightPanelHis({ setShowReviewHistory }) {
+	const [isScrollToQuery, setIsScrollToQuery] = useState(false)
+	const [
+		{ userHistory, nextSearchPage, totalPages },
+		dispatch,
+	] = useStateValue()
 	const [formData, setFormData] = useState(initialState)
 
 	useEffect(() => {
@@ -40,7 +44,7 @@ function RightPanelHis({settShowReviewHistory}) {
 		try {
 			const getHistory = async () => {
 				const res = await searchImage()
-				dispatch({ type: "SET_USER_HISTORY", userHistory: res })
+				setDataAfterSearch(res)
 			}
 
 			getHistory()
@@ -53,15 +57,48 @@ function RightPanelHis({settShowReviewHistory}) {
 		console.log(userHistory)
 	}, [userHistory])
 
+	const setDataAfterSearch = (res) => {
+		console.log(res)
+		dispatch({
+			type: "SET_CURRENT_SEARCH_PAGE",
+			nextSearchPage: res.nextPage,
+		})
+		dispatch({
+			type: "SET_TOTAL_SEARCH_PAGE",
+			totalPages: res.totalPages,
+		})
+		dispatch({
+			type: "SET_USER_HISTORY",
+			userHistory: res.images,
+		})
+	}
 	const handleSearch = async () => {
+		dispatch({ type: "RESET_USER_HISTORY" })
+		if (nextSearchPage !== 1) dispatch({ type: "RESET_SEARCH_PAGE" })
 		const res = await searchImage(formData)
-		dispatch({ type: "SET_USER_HISTORY", userHistory: res })
+		setDataAfterSearch(res)
 	}
 	const handleClearFilter = async () => {
+		dispatch({ type: "RESET_USER_HISTORY" })
+		dispatch({ type: "RESET_SEARCH_PAGE" })
 		const res = await searchImage()
-		dispatch({ type: "SET_USER_HISTORY", userHistory: res })
+		setDataAfterSearch(res)
+		setFormData(initialState)
 	}
 
+	const handleScroll = async () => {
+		var objDiv = document.querySelector(".history")
+		if (
+			objDiv.scrollTop + objDiv.offsetHeight >= objDiv.scrollHeight - 50 &&
+			!isScrollToQuery &&
+			nextSearchPage <= totalPages
+		) {
+			await setIsScrollToQuery(true)
+			const res = await searchImage(formData, nextSearchPage)
+			setDataAfterSearch(res)
+			setIsScrollToQuery(false)
+		}
+	}
 	return (
 		<div className="right-panel-his">
 			<h1>Recent</h1>
@@ -80,14 +117,14 @@ function RightPanelHis({settShowReviewHistory}) {
 					<button onClick={handleClearFilter}>Clear</button>
 				</div>
 			</div>
-			<div className="history">
+			<div className="history" onScroll={handleScroll}>
 				{userHistory.map((image) => (
 					<HistoryCard
 						imageId={image.imageId}
 						result={image.result}
 						date={image.date}
 						key={image.imageId}
-						settShowReviewHistory={settShowReviewHistory}
+						setShowReviewHistory={setShowReviewHistory}
 					/>
 				))}
 			</div>

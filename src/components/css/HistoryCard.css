@@ -57,6 +57,7 @@
 }
 .history-card .card__info__content__findings {
   margin: auto;
+  width: 100%;
 }
 .history-card .card__footer {
   box-sizing: border-box;

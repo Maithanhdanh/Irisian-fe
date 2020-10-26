@@ -65,13 +65,11 @@ export const getAccessToken = async () => {
 
 		return accessToken.user
 	}
-	console.log(user)
 	return user
 }
 
 export const storeToken = (response) => {
 	if(!response.response) return null
-	console.log('store token')
 	response.response.accessToken &&
 		localStorage.setItem("access_token", response.response.accessToken)
 	response.response.expiresIn &&
