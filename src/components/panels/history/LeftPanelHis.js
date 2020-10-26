@@ -150,8 +150,6 @@ function LeftPanelHis() {
 					<p>Your changes have been saved.</p>
 				</div>
 			) : null}
-
-			<button className="edit-button">Edit</button>
 		</div>
 	)
 }

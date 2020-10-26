@@ -6,7 +6,7 @@ export const getAccessTokenForAxios = () => {
 	const expiresIn = localStorage.getItem("access_token_expired")
 
 	if (!accessToken || !expiresIn) return null
-	if (expiresIn < Date.now()) {
+	if (expiresIn-5000 < Date.now()) {
 		const expiredToken = setTimeout(async () => {
 			try {
 				console.count("call get token")
@@ -52,7 +52,7 @@ export const getAccessToken = async () => {
 		return null
 	}
 
-	if (expiresIn <= Date.now()) {
+	if (expiresIn-5000 < Date.now()) {
 		const getToken = axiosClient({
 			method: ROUTE_MAP.USER.TOKEN.METHOD,
 			url: ROUTE_MAP.USER.TOKEN.PATH,
