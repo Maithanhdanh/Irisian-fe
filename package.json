@@ -11,6 +11,7 @@
     "moment": "^2.29.1",
     "query-string": "^6.13.4",
     "react": "^16.14.0",
+    "react-dates": "^21.8.0",
     "react-dom": "^16.14.0",
     "react-dropzone": "^11.2.0",
     "react-router-dom": "^5.2.0",

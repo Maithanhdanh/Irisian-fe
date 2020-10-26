@@ -1,0 +1,95 @@
+@import "./Config.scss";
+
+.history-card {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid $primary-color;
+    width: 25%;
+	box-sizing: border-box;
+	height: 300px;
+	border-radius: 12px;
+	position: relative;
+	margin-bottom: 20px;
+
+	.card__image {
+		padding: 5px;
+		object-fit: contain;
+		border-radius: 12px;
+		background-color: #000;
+		max-width: auto;
+		height: 50%;
+	}
+	.card__info {
+		padding: 10px 10px;
+		margin-bottom: 8%;
+		height: 100%;
+		span,
+		h2 {
+			color: #000;
+		}
+
+		&__content {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			font-size: 20px;
+			height: 100%;
+
+			&__info,
+			&__findings {
+				&__detail {
+					display: flex;
+					width: 100%;
+					justify-content: space-between;
+					gap: 5px;
+
+					span {
+						align-self: center;
+						width: 50%;
+						color: #000;
+					}
+					a {
+						font-size: 15px;
+						width: 50%;
+						text-align: center;
+						align-self: center;
+					}
+				}
+				align-items: center;
+            }
+            &__findings {
+				margin: auto;
+				width: 100%;
+            }
+		}
+	}
+	.card__footer {
+		box-sizing: border-box;
+		padding-left: 10px;
+		position: absolute;
+		height: 7%;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		border-top: 1px solid #cacbcd;
+	}
+}
+
+@media (max-width: 1050px) {
+	.card__info {
+		&__content {
+			font-size: 12px !important;
+
+			&__info,
+			&__findings {
+				&__detail {
+					a {
+						font-size: 12px !important;
+					}
+				}
+            }
+		}
+	}
+}

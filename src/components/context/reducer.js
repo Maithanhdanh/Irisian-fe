@@ -15,8 +15,14 @@ export const initialState = {
 	imageFindings: {},
 	needShowFindings: null,
 	detailUserInfo: {},
-}
 
+	userHistory: [],
+	selectedHistory:null,
+
+	nextSearchPage:1,
+	totalPages:null,
+}
+// "232f82d4-14e1-11eb-8109-0242ac140005.jpg"
 const reducer = (state, action) => {
 	switch (action.type) {
 		case "SET_USER":
@@ -61,6 +67,43 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				imageList: action.imageList,
+			}
+
+		case "SET_USER_HISTORY":
+			return {
+				...state,
+				userHistory: [...state.userHistory, ...action.userHistory],
+			}
+
+		case "RESET_USER_HISTORY":
+			return {
+				...state,
+				userHistory: [],
+			}
+
+		case "SET_SELECTED_HISTORY":
+			return {
+				...state,
+				selectedHistory: state.userHistory.find(his => his.imageId === action.selectedHistory),
+			}
+
+		case "SET_CURRENT_SEARCH_PAGE":
+			return {
+				...state,
+				nextSearchPage: action.nextSearchPage,
+			}
+
+		case "SET_TOTAL_SEARCH_PAGE":
+			return {
+				...state,
+				totalPages: action.totalPages,
+			}
+
+		case "RESET_SEARCH_PAGE":
+			return {
+				...state,
+				nextSearchPage: 1,
+				totalPages:null,
 			}
 
 		case "REMOVE_CURRENT_IMAGE":

@@ -1,4 +1,4 @@
-import axiosAuth from "../config/axiosAuth"
+import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
 
 export const getAccessTokenForAxios = () => {
@@ -6,11 +6,11 @@ export const getAccessTokenForAxios = () => {
 	const expiresIn = localStorage.getItem("access_token_expired")
 
 	if (!accessToken || !expiresIn) return null
-	if (expiresIn < Date.now()) {
+	if (expiresIn-5000 < Date.now()) {
 		const expiredToken = setTimeout(async () => {
 			try {
 				console.count("call get token")
-				const getToken = axiosAuth({
+				const getToken = axiosClient({
 					method: ROUTE_MAP.USER.TOKEN.METHOD,
 					url: ROUTE_MAP.USER.TOKEN.PATH,
 				})
@@ -19,20 +19,15 @@ export const getAccessTokenForAxios = () => {
 				const accessToken = getTokenData.response
 
 				storeToken(accessToken)
-				// localStorage.setItem("access_token", accessToken.accessToken)
-				// localStorage.setItem("access_token_expired", accessToken.expiresIn)
 
-				clearTimeout(expiredToken)
-				console.log(accessToken)
 				return accessToken.accessToken
 			} catch (e) {
 				console.count("error")
 				clearTimeout(expiredToken)
-				console.log(e)
 			}
 		}, 2000)
 	}
-	console.count("call return token")
+	console.count("OLD token")
 	return accessToken
 }
 
@@ -55,15 +50,15 @@ export const getAccessToken = async () => {
 		return null
 	}
 
-	if (expiresIn <= Date.now()) {
-		const getToken = axiosAuth({
+	if (expiresIn-5000 < Date.now()) {
+		const getToken = axiosClient({
 			method: ROUTE_MAP.USER.TOKEN.METHOD,
 			url: ROUTE_MAP.USER.TOKEN.PATH,
 		})
 		const getTokenData = await getToken
 		if (getTokenData.error) return null
 		const accessToken = getTokenData.response
-
+		
 		storeToken(accessToken)
 
 		return accessToken.user
@@ -72,15 +67,16 @@ export const getAccessToken = async () => {
 }
 
 export const storeToken = (response) => {
-	console.log(response)
-	response.accessToken &&
-		localStorage.setItem("access_token", response.accessToken)
-	response.expiresIn &&
-		localStorage.setItem("access_token_expired", response.expiresIn)
-	response.user && localStorage.setItem("user", JSON.stringify(response.user))
-	response.refreshToken_expiresIn &&
+	if(!response.response) return null
+	response.response.accessToken &&
+		localStorage.setItem("access_token", response.response.accessToken)
+	response.response.expiresIn &&
+		localStorage.setItem("access_token_expired", response.response.expiresIn)
+	response.response.user &&
+		localStorage.setItem("user", JSON.stringify(response.response.user))
+	response.response.refreshToken_expiresIn &&
 		localStorage.setItem(
 			"refreshToken_expiresIn",
-			response.refreshToken_expiresIn
+			response.response.refreshToken_expiresIn
 		)
 }

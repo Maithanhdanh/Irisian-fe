@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import { useHistory } from "react-router-dom"
-import axiosAuth from "../../config/axiosAuth"
 import { getAccessToken } from "../../helpers/token"
 import { useStateValue } from "../context/StateProvider"
 import "../css/InnerLayout.css"
@@ -14,7 +13,7 @@ function Home() {
 	useEffect(() => {
 		if(history === undefined) return
 		const checkSession = async () => {
-            console.count('personals')
+            console.count('upload')
 			const token = await getAccessToken()
 
 			if(token == null) return history.push("/login")

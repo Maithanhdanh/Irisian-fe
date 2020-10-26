@@ -1,6 +1,7 @@
 import axios from "axios"
 import queryString from "query-string"
 import { getAccessTokenForAxios, storeToken } from "../helpers/token"
+import ROUTE_MAP from "./urlBase"
 import {NAVIGATE_DOMAIN} from "./vars"
 
 const axiosClient = axios.create({
@@ -16,7 +17,6 @@ const axiosClient = axios.create({
 })
 
 axiosClient.interceptors.request.use(async (config) => {
-	console.count('axiosClient')
 	const token = await getAccessTokenForAxios()
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`
@@ -28,7 +28,9 @@ axiosClient.interceptors.request.use(async (config) => {
 axiosClient.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {
-			storeToken(response.data)
+			if(response.config.url === ROUTE_MAP.USER.LOGIN.PATH || response.config.url === ROUTE_MAP.USER.TOKEN.PATH){
+				storeToken(response.data)
+			}
 			return response.data
 		}
 

@@ -1,6 +1,7 @@
 .inner-layout {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 .inner-layout .navbar {
   padding: 7px;

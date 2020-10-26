@@ -1,25 +1,99 @@
 .right-panel-his {
   display: flex;
   flex-direction: column;
-  gap: 2em;
   color: #CACBCD;
   padding: 1.5em;
 }
+.right-panel-his h1 {
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin: 0;
+}
 .right-panel-his .header {
-  padding: 1em;
+  padding: 0 40px;
+  align-items: center;
   display: flex;
   height: 8%;
   width: 100%;
+  margin-bottom: 2em;
+  background-color: #E8E8E8;
+  border-radius: 10px;
+}
+.right-panel-his .header__title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 800;
+  margin-left: -5px;
 }
 .right-panel-his .header .filter-bar {
-  margin: auto;
   display: flex;
   gap: 20px;
+  width: 100%;
 }
 .right-panel-his .header .filter-bar .input {
   opacity: 0.5;
   border-radius: 10px;
   background-color: #E8E8E8;
+  padding: 10px 20;
+}
+.right-panel-his .header .filter-bar .input i {
+  margin-left: 7px;
+}
+.right-panel-his .header .filter-bar button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #00b5ad;
+  border-color: teal;
+}
+.right-panel-his .header .filter-bar button:nth-last-child(2) {
+  margin-left: auto;
+}
+.right-panel-his .header .filter-bar > button:last-child {
+  background-color: #ff6666;
+  border-color: #ff4d4d;
+}
+.right-panel-his .header .filter-bar__button {
+  place-self: center;
+  position: relative;
+}
+.right-panel-his .header .filter-bar__button:first-child {
+  margin-left: auto;
+}
+.right-panel-his .header .filter-bar__button__choice {
+  margin-top: 5px;
+  position: absolute;
+  z-index: 100;
+}
+.right-panel-his .history {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2%;
+  height: 78vh;
+  justify-content: space-around;
+  overflow-y: auto;
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
+}
+.right-panel-his .history::-webkit-scrollbar {
+  width: 10px;
+}
+.right-panel-his .history::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background: #f1f1f1;
+}
+.right-panel-his .history::-webkit-scrollbar-thumb {
+  background: #888;
+}
+.right-panel-his .history::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-width: 1050px) {
+  .header {
+    padding: 0 1em !important;
+  }
 }
 
 /*# sourceMappingURL=RightPanelHis.css.map */

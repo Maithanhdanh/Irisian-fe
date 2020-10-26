@@ -3,17 +3,24 @@ import { useStateValue } from "../../context/StateProvider"
 import "../../css/RightPanel.css"
 import DropZone from "./dropzone/DropZone"
 import UploadedImage from "./uploadedImage/UploadedImage"
+import PropTypes from "prop-types"
 
-function RightPanel() {
-	// const [file, setFile] = useState([])
+RightPanel.propTypes = {
+	type: PropTypes.string
+}
+RightPanel.defaultProps = {
+	type:null
+}
+
+function RightPanel({type}) {
 	const [{ uploadedImage }] = useStateValue()
 
 	return (
 		<div className="right-panel">
-			{uploadedImage.no_background === "" ? (
+			{uploadedImage.no_background === "" && !type ?(
 				<DropZone />
 			) : (
-				<UploadedImage />
+				<UploadedImage type={type}/>
 			)}
 		</div>
 	)

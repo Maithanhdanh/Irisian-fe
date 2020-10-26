@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { useDropzone } from "react-dropzone"
 import { Icon } from "semantic-ui-react"
-import { UploadImage } from "../../../../helpers/predictImage"
+import { UploadImage } from "../../../../helpers/image"
 import { useStateValue } from "../../../context/StateProvider"
 
 function DropZone() {
@@ -11,12 +11,12 @@ function DropZone() {
 
 			const reader = new FileReader()
 
-			reader.onabort = () => console.log("file reading was aborted")
-			reader.onerror = () => console.log("file reading has failed")
-			reader.onload = () => {
-				// Do whatever you want with the file contents
-				// const binaryStr = reader.result
-			}
+			// reader.onabort = () => console.log("file reading was aborted")
+			// reader.onerror = () => console.log("file reading has failed")
+			// reader.onload = () => {
+			// 	// Do whatever you want with the file contents
+			// 	// const binaryStr = reader.result
+			// }
 			reader.readAsArrayBuffer(file)
 			const uploadedFile = Object.assign(file, {
                 preview: URL.createObjectURL(file),

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { Button, Form } from "semantic-ui-react"
 import "../css/Login.css"
 import PropTypes from "prop-types"
-import axiosAuth from "../../config/axiosAuth"
 import ROUTE_MAP from "../../config/urlBase"
 import { useHistory } from "react-router-dom"
 import { useStateValue } from "../context/StateProvider"
@@ -65,7 +64,6 @@ function Login({ type, initialState }) {
 
 			const tokenData = await token
 			if (tokenData.error) return alert("failed to login")
-			console.log(tokenData)
 			dispatch({
 				type: "SET_USER",
 				user: tokenData.response.user,

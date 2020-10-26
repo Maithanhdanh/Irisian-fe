@@ -16,21 +16,6 @@ import { useStateValue } from "./components/context/StateProvider"
 import { getAccessToken } from "./helpers/token"
 
 function App() {
-	const [{ user }, dispatch] = useStateValue()
-	const history = useHistory()
-	useEffect(() => {
-		if(history === undefined) return
-		const checkSession = async () => {
-			const token = await getAccessToken()
-
-			if(token == null) return history.push("/login")
-			console.log(token)
-			dispatch({ type: "SET_USER", user: token.user })
-		}
-
-		checkSession()
-	}, [])
-
 	return (
 		<Router>
 			<div className="App">
