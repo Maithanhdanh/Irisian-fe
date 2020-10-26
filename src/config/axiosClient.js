@@ -2,7 +2,7 @@ import axios from "axios"
 import queryString from "query-string"
 import { getAccessTokenForAxios, storeToken } from "../helpers/token"
 import ROUTE_MAP from "./urlBase"
-import {NAVIGATE_DOMAIN} from "./vars"
+import { NAVIGATE_DOMAIN } from "./vars"
 
 const axiosClient = axios.create({
 	baseURL: NAVIGATE_DOMAIN.IRISIAN,

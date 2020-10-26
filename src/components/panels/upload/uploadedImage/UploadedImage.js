@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import { useStateValue } from "../../../context/StateProvider"
+import React, { useEffect, useState } from "react"
+import { NAVIGATE_DOMAIN, RULE_FILTER_CHANGE } from "../../../../config/vars"
 import handlePredictImage from "../../../../helpers/image"
-import { NAVIGATE_DOMAIN } from "../../../../config/vars"
-import { RULE_FILTER_CHANGE } from "../../../../config/vars"
+import { useStateValue } from "../../../context/StateProvider"
 
 UploadedImage.propTypes = {
 	type: PropTypes.string,

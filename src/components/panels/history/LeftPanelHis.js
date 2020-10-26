@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import { useStateValue } from "../../context/StateProvider"
-import "../../css/LeftPanelHis.css"
 import axiosClient from "../../../config/axiosClient"
 import ROUTE_MAP from "../../../config/urlBase"
+import { useStateValue } from "../../context/StateProvider"
+import "../../css/LeftPanelHis.css"
 
 function LeftPanelHis() {
 	const [{ user }, dispatch] = useStateValue()
@@ -15,7 +15,7 @@ function LeftPanelHis() {
 	const [showError, setShowError] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
 	const [formData, setFormData] = useState(initialState)
-	
+
 	useEffect(() => {
 		setFormData({ name: user.name, email: user.email })
 	}, [user])
@@ -58,9 +58,7 @@ function LeftPanelHis() {
 			<div className="avatar">
 				<img
 					src={
-						user?.avatar
-							? require(user.avatar)
-							: "https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png"
+						"https://cdn2.iconfinder.com/data/icons/font-awesome/1792/user-512.png"
 					}
 					alt="avatar"
 				/>

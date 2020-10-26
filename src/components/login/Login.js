@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
-import { Button, Form } from "semantic-ui-react"
-import "../css/Login.css"
 import PropTypes from "prop-types"
-import ROUTE_MAP from "../../config/urlBase"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { useStateValue } from "../context/StateProvider"
+import { Button, Form } from "semantic-ui-react"
 import axiosClient from "../../config/axiosClient"
+import ROUTE_MAP from "../../config/urlBase"
+import { useStateValue } from "../context/StateProvider"
+import "../css/Login.css"
 
 Login.propTypes = {
 	type: PropTypes.string,

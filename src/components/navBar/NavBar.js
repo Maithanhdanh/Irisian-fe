@@ -1,9 +1,9 @@
 import React, { useEffect } from "react"
 import { Link, useHistory, useLocation } from "react-router-dom"
-import { useStateValue } from "../context/StateProvider"
-import ROUTE_MAP from "../../config/urlBase"
-import "../css/NavBar.css"
 import axiosClient from "../../config/axiosClient"
+import ROUTE_MAP from "../../config/urlBase"
+import { useStateValue } from "../context/StateProvider"
+import "../css/NavBar.css"
 
 function NavBar() {
 	const history = useHistory()

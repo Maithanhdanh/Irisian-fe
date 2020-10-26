@@ -1,8 +1,7 @@
+import queryString from "query-string"
 import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
-import { COLOR_PROCESS_BAR, RESULT_THRESHOLD_LEVELS } from "../config/vars"
-import queryString from "query-string"
-import { INITIAL_SEARCH_IMAGE } from "../config/vars"
+import { COLOR_PROCESS_BAR, INITIAL_SEARCH_IMAGE, RESULT_THRESHOLD_LEVELS } from "../config/vars"
 
 export const UploadImage = async (file) => {
 	try {

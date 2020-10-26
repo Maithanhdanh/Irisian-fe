@@ -1,9 +1,9 @@
+import PropTypes from "prop-types"
 import React from "react"
 import { useStateValue } from "../../context/StateProvider"
 import "../../css/RightPanel.css"
 import DropZone from "./dropzone/DropZone"
 import UploadedImage from "./uploadedImage/UploadedImage"
-import PropTypes from "prop-types"
 
 RightPanel.propTypes = {
 	type: PropTypes.string

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { useStateValue } from "../../context/StateProvider"
-import "../../css/LeftPanel.css"
-import { createSequence } from "../../../helpers/sequence"
 import PropTypes from "prop-types"
+import React, { useEffect, useState } from "react"
 import {
 	needShowingInfo,
-	preProcessImageFindings,
+	preProcessImageFindings
 } from "../../../helpers/image"
+import { createSequence } from "../../../helpers/sequence"
+import { useStateValue } from "../../context/StateProvider"
+import "../../css/LeftPanel.css"
 
 LeftPanel.propTypes = {
 	type: PropTypes.string,

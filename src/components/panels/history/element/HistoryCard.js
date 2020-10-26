@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react"
-import "../../../css/HistoryCard.css"
 import PropTypes from "prop-types"
+import React, { useEffect, useState } from "react"
 import { NAVIGATE_DOMAIN } from "../../../../config/vars"
 import {
-	needShowingInfo,
-	needShowFinding,
-	addColors,
-	sortObjectByValue,
+	addColors, needShowFinding, needShowingInfo, sortObjectByValue
 } from "../../../../helpers/image"
 import { createSequence } from "../../../../helpers/sequence"
 import { useStateValue } from "../../../context/StateProvider"
+import "../../../css/HistoryCard.css"
 
 HistoryCard.propTypes = {
 	imageId: PropTypes.string,

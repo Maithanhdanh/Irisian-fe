@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import PropTypes from "prop-types"
+import React, { useRef } from 'react'
 import useOnClickOutside from '../../custom-hook/useOutSideClick'
 import { useStateValue } from '../context/StateProvider'
 import '../css/ReviewHistory.css'
 import LeftPanel from "../panels/upload/LeftPanel"
 import RightPanel from "../panels/upload/RightPanel"
-import PropTypes from "prop-types"
 
 ReviewHistory.propTypes = {
 	setShowReviewHistory: PropTypes.func

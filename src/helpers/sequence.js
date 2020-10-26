@@ -1,4 +1,4 @@
-import {RESULT_THRESHOLD_LEVELS} from '../config/vars'
+import { RESULT_THRESHOLD_LEVELS } from '../config/vars'
 
 export const createSequence = (NUM_BAR = RESULT_THRESHOLD_LEVELS.NUM_BAR) => {
     const sequence = []

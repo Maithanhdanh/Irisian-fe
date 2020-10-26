@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
 import moment from "moment"
-import { DayPickerRangeController } from "react-dates"
 import PropTypes from "prop-types"
+import React, { useState } from "react"
+import { DayPickerRangeController } from "react-dates"
 import { DATE_FORMAT } from "../../../../config/vars"
 DatePicker.propTypes = {
 	data: PropTypes.object,

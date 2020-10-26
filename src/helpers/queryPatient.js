@@ -1,7 +1,7 @@
+import moment from "moment"
+import queryString from "query-string"
 import axiosClient from "../components/config/axiosClient"
 import URL_BASE from "../components/config/urlBase"
-import queryString from "query-string"
-import moment from "moment"
 function queryPatient() {}
 
 queryPatient.prototype.queryPatientList = async (

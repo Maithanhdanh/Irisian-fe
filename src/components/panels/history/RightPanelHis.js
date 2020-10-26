@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react"
-import { useStateValue } from "../../context/StateProvider"
-import "../../css/RightPanelHis.css"
-import HistoryCard from "./element/HistoryCard"
-
-import "react-dates/initialize"
-import "react-dates/lib/css/_datepicker.css"
-import DatePicker from "./element/DatePicker"
-import DiseasePicker from "./element/DiseasePicker"
-import { searchImage } from "../../../helpers/image"
-import { DATE_FORMAT } from "../../../config/vars"
 import moment from "moment"
 import PropTypes from "prop-types"
+import React, { useEffect, useState } from "react"
+import "react-dates/initialize"
+import "react-dates/lib/css/_datepicker.css"
+import { DATE_FORMAT } from "../../../config/vars"
+import { searchImage } from "../../../helpers/image"
+import { useStateValue } from "../../context/StateProvider"
+import "../../css/RightPanelHis.css"
+import DatePicker from "./element/DatePicker"
+import DiseasePicker from "./element/DiseasePicker"
+import HistoryCard from "./element/HistoryCard"
+
 
 RightPanelHis.propTypes = {
 	setShowReviewHistory: PropTypes.func,

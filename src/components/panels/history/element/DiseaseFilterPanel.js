@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import "../../../css/DiseaseFilterPanel.css"
+import React, { useEffect, useState } from "react"
 import { DISEASE_LIST } from "../../../../config/vars"
+import "../../../css/DiseaseFilterPanel.css"
 
 DiseaseFilterPanel.propTypes = {
 	setDiseaseFilter: PropTypes.func,

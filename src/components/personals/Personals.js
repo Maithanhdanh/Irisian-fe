@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-import useOnClickOutside from "../../custom-hook/useOutSideClick"
 import { getAccessToken } from "../../helpers/token"
 import { useStateValue } from "../context/StateProvider"
 import "../css/InnerLayout.css"

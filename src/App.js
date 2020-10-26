@@ -1,19 +1,15 @@
-import React, { useEffect } from "react"
-import "./App.css"
+import React from "react"
 import {
 	BrowserRouter as Router,
-	Switch,
-	Route,
-	useHistory,
+	Route, Switch
 } from "react-router-dom"
-import "./components/css/App.css"
-import Login from "./components/login/Login"
-import Home from "./components/home/Home"
 import "semantic-ui-css/semantic.min.css"
+import "./App.css"
+import "./components/css/App.css"
 import Dashboard from "./components/dashboard/Dashboard"
+import Home from "./components/home/Home"
+import Login from "./components/login/Login"
 import Personals from "./components/personals/Personals"
-import { useStateValue } from "./components/context/StateProvider"
-import { getAccessToken } from "./helpers/token"
 
 function App() {
 	return (
