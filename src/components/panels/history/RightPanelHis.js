@@ -31,15 +31,20 @@ const initialState = {
 function RightPanelHis({ setShowReviewHistory }) {
 	const [isScrollToQuery, setIsScrollToQuery] = useState(false)
 	const [
-		{ userHistory, nextSearchPage, totalPages },
+		{ user, userHistory, nextSearchPage, totalPages },
 		dispatch,
 	] = useStateValue()
 	const [formData, setFormData] = useState(initialState)
 
 	useEffect(() => {
+		if(user === {}) return null
 		try {
+			console.count('call search')
+			dispatch({ type: "RESET_USER_HISTORY" })
+			dispatch({ type: "RESET_SEARCH_PAGE" })
 			const getHistory = async () => {
 				const res = await searchImage()
+				if(!res) return null
 				setDataAfterSearch(res)
 			}
 
@@ -68,30 +73,45 @@ function RightPanelHis({ setShowReviewHistory }) {
 		})
 	}
 	const handleSearch = async () => {
-		dispatch({ type: "RESET_USER_HISTORY" })
-		if (nextSearchPage !== 1) dispatch({ type: "RESET_SEARCH_PAGE" })
-		const res = await searchImage(formData)
-		setDataAfterSearch(res)
+		try{
+			dispatch({ type: "RESET_USER_HISTORY" })
+			if (nextSearchPage !== 1) dispatch({ type: "RESET_SEARCH_PAGE" })
+			const res = await searchImage(formData)
+			if(!res) return null
+			setDataAfterSearch(res)
+		} catch(err) {
+			alert(err.message)
+		}
 	}
 	const handleClearFilter = async () => {
-		dispatch({ type: "RESET_USER_HISTORY" })
-		dispatch({ type: "RESET_SEARCH_PAGE" })
-		const res = await searchImage()
-		setDataAfterSearch(res)
-		setFormData(initialState)
+		try{
+			dispatch({ type: "RESET_USER_HISTORY" })
+			dispatch({ type: "RESET_SEARCH_PAGE" })
+			const res = await searchImage()
+			if(!res) return null
+			setDataAfterSearch(res)
+			setFormData(initialState)
+		} catch (err) {
+			alert(err.message)
+		}
 	}
 
 	const handleScroll = async () => {
-		var objDiv = document.querySelector(".history")
-		if (
-			objDiv.scrollTop + objDiv.offsetHeight >= objDiv.scrollHeight - 50 &&
-			!isScrollToQuery &&
-			nextSearchPage <= totalPages
-		) {
-			await setIsScrollToQuery(true)
-			const res = await searchImage(formData, nextSearchPage)
-			setDataAfterSearch(res)
-			setIsScrollToQuery(false)
+		try{
+			var objDiv = document.querySelector(".history")
+			if (
+				objDiv.scrollTop + objDiv.offsetHeight >= objDiv.scrollHeight - 50 &&
+				!isScrollToQuery &&
+				nextSearchPage <= totalPages
+			) {
+				await setIsScrollToQuery(true)
+				const res = await searchImage(formData, nextSearchPage)
+				if(!res) return null
+				setDataAfterSearch(res)
+				setIsScrollToQuery(false)
+			}
+		}catch (err) {
+			alert(err.message)
 		}
 	}
 	return (

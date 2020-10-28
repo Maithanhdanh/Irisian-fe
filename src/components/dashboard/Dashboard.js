@@ -21,7 +21,7 @@ function Dashboard() {
 			type: "SET_USER",
 			user: JSON.parse(user),
 		})
-	})
+	},[])
 
 	return (
 		<>

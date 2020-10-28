@@ -18,13 +18,17 @@ function DiseaseFilterPanel({ diseaseFilter, setDiseaseFilter }) {
 	const [filterApply, setFilterApply] = useState(diseaseFilter)
 
 	const handleToggleFilter = async (e) => {
-		if (filterApply.indexOf(e.target.name) !== -1) {
-			await setFilterApply([
-				...filterApply.filter((item) => item !== e.target.name),
-			])
-			return
+		try{
+			if (filterApply.indexOf(e.target.name) !== -1) {
+				await setFilterApply([
+					...filterApply.filter((item) => item !== e.target.name),
+				])
+				return
+			}
+			await setFilterApply([...new Set([...filterApply, e.target.name])])
+		} catch (err) {
+			alert(err.message)
 		}
-		await setFilterApply([...new Set([...filterApply, e.target.name])])
 	}
 
 	useEffect(() => {

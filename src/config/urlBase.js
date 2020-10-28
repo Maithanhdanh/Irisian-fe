@@ -1,5 +1,4 @@
 const URL_BASE = {
-	AUTH:"/auth",
 	USER: "/user",
 	IMAGE: "/image",
 }

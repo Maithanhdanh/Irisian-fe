@@ -15,10 +15,11 @@ export const UploadImage = async (file) => {
 			headers: { "Content-Type": "multipart/form-data" },
 		})
 
-		if (response.error) alert(`[UPLOAD IMAGE] failed`)
+		if (response.error) return alert(`[UPLOAD IMAGE] failed`)
 		return response.response.data
 	} catch (e) {
 		alert(`[UPLOAD IMAGE] ${e}`)
+		return null
 	}
 }
 
@@ -29,10 +30,11 @@ const getImageInfo = async (imageId) => {
 			url: ROUTE_MAP.IMAGE.INFO.PATH + `/${imageId}`,
 		})
 
-		if (response.error) alert(`[PREDICT IMAGE] failed`)
+		if (response.error) return alert(`[PREDICT IMAGE] failed`)
 		return response.response.data
 	} catch (e) {
 		alert(`[PREDICT IMAGE] ${e}`)
+		return null
 	}
 }
 
@@ -43,10 +45,11 @@ const getImageFindings = async (imageId) => {
 			url: ROUTE_MAP.IMAGE.FINDING.PATH + `/${imageId}`,
 		})
 
-		if (response.error) alert(`[FINDING IMAGE] failed`)
+		if (response.error) return alert(`[FINDING IMAGE] failed`)
 		return response.response.data
 	} catch (e) {
 		alert(`[FINDING IMAGE] ${e}`)
+		return null
 	}
 }
 
@@ -112,26 +115,30 @@ export const needShowingInfo = (imageInfo) => {
 }
 
 const handlePredictImage = async (imageId, dispatch) => {
-	imageId = imageId.replace("/image/", "")
-
-	const imageInfo = await getImageInfo(imageId)
-	const selectedInfo = needShowingInfo(imageInfo)
-	dispatch({
-		type: "SET_INFO_IMAGE",
-		imageInfo: imageInfo,
-		needShowInfo: selectedInfo,
-	})
-
-	const imageFindings = await getImageFindings(imageId)
-	const sortedImageFindings = sortObjectByValue(imageFindings)
-	const addedColors = addColors(sortedImageFindings)
-	const selectedFindings = needShowFinding(addedColors)
-
-	dispatch({
-		type: "SET_FINDING_IMAGE",
-		imageFindings: addedColors,
-		needShowFindings: selectedFindings,
-	})
+	try{
+		imageId = imageId.replace("/image/", "")
+	
+		const imageInfo = await getImageInfo(imageId)
+		const selectedInfo = needShowingInfo(imageInfo)
+		dispatch({
+			type: "SET_INFO_IMAGE",
+			imageInfo: imageInfo,
+			needShowInfo: selectedInfo,
+		})
+	
+		const imageFindings = await getImageFindings(imageId)
+		const sortedImageFindings = sortObjectByValue(imageFindings)
+		const addedColors = addColors(sortedImageFindings)
+		const selectedFindings = needShowFinding(addedColors)
+	
+		dispatch({
+			type: "SET_FINDING_IMAGE",
+			imageFindings: addedColors,
+			needShowFindings: selectedFindings,
+		})
+	} catch (e) {
+		alert(e.message)
+	}
 }
 
 export const preProcessImageFindings = (imageFindings) => {
@@ -160,6 +167,7 @@ export const searchImage = async (
 		
 	} catch (e) {
 		alert(e.message)
+		return null
 	}
 }
 

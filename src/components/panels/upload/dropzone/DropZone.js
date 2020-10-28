@@ -11,31 +11,35 @@ function DropZone() {
 
 			const reader = new FileReader()
 
-			// reader.onabort = () => console.log("file reading was aborted")
-			// reader.onerror = () => console.log("file reading has failed")
-			// reader.onload = () => {
-			// 	// Do whatever you want with the file contents
-			// 	// const binaryStr = reader.result
-			// }
+			reader.onabort = () => console.log("file reading was aborted")
+			reader.onerror = () => console.log("file reading has failed")
+			reader.onload = () => {
+				// Do whatever you want with the file contents
+				// const binaryStr = reader.result
+			}
 			reader.readAsArrayBuffer(file)
 			const uploadedFile = Object.assign(file, {
                 preview: URL.createObjectURL(file),
 			})
-			
-			const responseImage = await UploadImage(file)
-			dispatch({
-				type: "SET_UPLOADED_IMAGE",
-				uploadedImage: responseImage,
-			})
-
-			dispatch({
-				type: "SET_CURRENT_IMAGE",
-				currImage: {
-					name: file.name,
-					path: file.path,
-					file: uploadedFile,
-				},
-			})
+			try{
+				const responseImage = await UploadImage(file)
+				if(responseImage.error) return null
+				dispatch({
+					type: "SET_UPLOADED_IMAGE",
+					uploadedImage: responseImage,
+				})
+	
+				dispatch({
+					type: "SET_CURRENT_IMAGE",
+					currImage: {
+						name: file.name,
+						path: file.path,
+						file: uploadedFile,
+					},
+				})
+			}catch(err) {
+				alert(err.message)
+			}
 			
 		})
 	})

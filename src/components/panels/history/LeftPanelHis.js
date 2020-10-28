@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import axiosClient from "../../../config/axiosClient"
 import ROUTE_MAP from "../../../config/urlBase"
+import { storeUser } from "../../../helpers/token"
 import { useStateValue } from "../../context/StateProvider"
 import "../../css/LeftPanelHis.css"
 
@@ -38,20 +39,26 @@ function LeftPanelHis() {
 		})
 	}
 	const handleOnSubmit = async () => {
-		if (formData.email !== "") {
-			setShowMessage(true)
-		}
-		const res = await axiosClient({
-			method: ROUTE_MAP.USER.UPDATE.METHOD,
-			url: ROUTE_MAP.USER.UPDATE.PATH,
-			data: formData,
-		})
+		try {
+			if (formData.email !== "") {
+				setShowMessage(true)
+			}
+			const res = await axiosClient({
+				method: ROUTE_MAP.USER.UPDATE.METHOD,
+				url: ROUTE_MAP.USER.UPDATE.PATH,
+				data: formData,
+			})
+			if (res.error) {
+				setShowError(true)
+			}
 
-		if (res.error) {
-			setShowError(true)
+			dispatch({ type:'SET_USER',user:res.response.user})
+			storeUser(res)
+			setIsEdit(false)
+			setShowSuccess(true)
+		} catch (err) {
+			alert(err.message)
 		}
-		setIsEdit(false)
-		setShowSuccess(true)
 	}
 	return (
 		<div className="left-panel-his">
@@ -126,24 +133,24 @@ function LeftPanelHis() {
 				) : null}
 			</div>
 			{showMessage ? (
-				<div class="ui form warning">
-					<div class="ui warning message">
-						<div class="header">Note!</div>
-						<ul class="list">
+				<div className="ui form warning">
+					<div className="ui warning message">
+						<div className="header">Note!</div>
+						<ul className="list">
 							<li>That e-mail won't change.</li>
 						</ul>
 					</div>
 				</div>
 			) : null}
 			{showError ? (
-				<div class="ui error message">
-					<div class="header">Error</div>
+				<div className="ui error message">
+					<div className="header">Error</div>
 					<p>Update failed</p>
 				</div>
 			) : null}
 			{showSuccess ? (
-				<div class="ui success message">
-					<div class="header">Update Completed</div>
+				<div className="ui success message">
+					<div className="header">Update Completed</div>
 					<p>Your changes have been saved.</p>
 				</div>
 			) : null}

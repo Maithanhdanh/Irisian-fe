@@ -44,7 +44,7 @@ function Login({ type, initialState }) {
 			})
 			return history.push("/")
 		}
-	})
+	},[])
 
 	const handleOnSubmit = async (e) => {
 		try {

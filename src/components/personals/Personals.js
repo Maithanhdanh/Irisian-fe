@@ -15,14 +15,17 @@ function Personals() {
 	useEffect(() => {
 		try {
 			const checkSession = async () => {
+				console.count('call TOKEN form personal')
 				const token = await getAccessToken()
 				if (token == null) return history.push("/login")
 				dispatch({ type: "SET_USER", user: token })
+				return null
 			}
 
 			checkSession()
 		} catch (e) {
 			alert(e.message)
+			return null
 		}
 	}, [])
 
