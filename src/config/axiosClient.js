@@ -16,6 +16,7 @@ const axiosClient = axios.create({
 	paramsSerializer: (params) => queryString.stringify(params),
 })
 
+// <!-- middleware handle request -->
 axiosClient.interceptors.request.use(async (config) => {
 	const token = await getAccessTokenForAxios()
 	if (token) {
@@ -25,6 +26,7 @@ axiosClient.interceptors.request.use(async (config) => {
 	return config
 })
 
+// <!-- middleware handle response -->
 axiosClient.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {

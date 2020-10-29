@@ -1,6 +1,7 @@
 import axiosToken from "../config/axiosToken"
 import ROUTE_MAP from "../config/urlBase"
 
+// <!-- verify or get new access token for axios request -->
 export const getAccessTokenForAxios = async () => {
 	const accessToken = localStorage.getItem("access_token")
 	const expiresIn = localStorage.getItem("access_token_expired")
@@ -31,6 +32,7 @@ export const getAccessTokenForAxios = async () => {
 	}
 }
 
+// <!-- Check login session for main page -->
 export const getAccessToken = async () => {
 	const user = JSON.parse(localStorage.getItem("user"))
 	const accessToken = localStorage.getItem("access_token")
@@ -49,10 +51,9 @@ export const getAccessToken = async () => {
 		localStorage.clear()
 		return null
 	}
-	console.log("check current token expiresIn")
+	
 	if (expiresIn - 30000 < Date.now()) {
 		try {
-			console.log("call new token")
 			const getToken = axiosToken({
 				method: ROUTE_MAP.USER.TOKEN.METHOD,
 				url: ROUTE_MAP.USER.TOKEN.PATH,
@@ -72,6 +73,7 @@ export const getAccessToken = async () => {
 	return user
 }
 
+// <!-- Store login session to local storage -->
 export const storeToken = (response) => {
 	if (!response.response) return null
 	response.response.accessToken &&
@@ -86,7 +88,7 @@ export const storeToken = (response) => {
 			response.response.refreshToken_expiresIn
 		)
 }
-
+// <!-- Store user info to local storage -->
 export const storeUser = (response) => {
 	if (!response.response) return null
 	response.response.user &&

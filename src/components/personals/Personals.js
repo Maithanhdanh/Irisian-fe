@@ -12,10 +12,11 @@ function Personals() {
 	const [{}, dispatch] = useStateValue()
 	const [showReviewHistory, setShowReviewHistory] = useState(false)
 	const history = useHistory()
+
 	useEffect(() => {
+		//<!-- Check login session - direct to login page -->
 		try {
 			const checkSession = async () => {
-				console.count('call TOKEN form personal')
 				const token = await getAccessToken()
 				if (token == null) return history.push("/login")
 				dispatch({ type: "SET_USER", user: token })

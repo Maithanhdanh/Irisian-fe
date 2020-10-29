@@ -3,6 +3,7 @@ import axiosClient from "../config/axiosClient"
 import ROUTE_MAP from "../config/urlBase"
 import { COLOR_PROCESS_BAR, INITIAL_SEARCH_IMAGE, RESULT_THRESHOLD_LEVELS } from "../config/vars"
 
+// <!-- Upload image -->
 export const UploadImage = async (file) => {
 	try {
 		var formData = new FormData()
@@ -23,6 +24,7 @@ export const UploadImage = async (file) => {
 	}
 }
 
+// <!-- Get INFO -->
 const getImageInfo = async (imageId) => {
 	try {
 		const response = await axiosClient({
@@ -38,6 +40,7 @@ const getImageInfo = async (imageId) => {
 	}
 }
 
+// <!-- Get FINDINGS -->
 const getImageFindings = async (imageId) => {
 	try {
 		const response = await axiosClient({
@@ -53,6 +56,7 @@ const getImageFindings = async (imageId) => {
 	}
 }
 
+// <!-- Sort findings in descending order -->
 export const sortObjectByValue = (object) => {
 	var sorted = []
 	for (var key in object) {
@@ -64,6 +68,7 @@ export const sortObjectByValue = (object) => {
 	return sorted
 }
 
+// <!-- filter findings that pass threshold -->
 export const needShowFinding = (imageFindings) => {
 	const needShowingFindings = imageFindings.filter(
 		(findings) => findings[1] >= RESULT_THRESHOLD_LEVELS.FINDINGS
@@ -72,6 +77,7 @@ export const needShowFinding = (imageFindings) => {
 	return needShowingFindings
 }
 
+// <!-- add style color that need to show in result bar (color name, HEX, ...) -->
 export const addColors = (findings) => {
 	const addedColors = []
 	findings.forEach((finding, index) => {
@@ -102,6 +108,7 @@ export const addColors = (findings) => {
 	return addedColors
 }
 
+// <!-- filter info that pass threshold -->
 export const needShowingInfo = (imageInfo) => {
 	const infoType = Object.keys(imageInfo).filter(
 		(info) => !info.includes("_probability")
@@ -114,6 +121,7 @@ export const needShowingInfo = (imageInfo) => {
 	return needShowingInfo
 }
 
+// <!-- call all API related to image -->
 const handlePredictImage = async (imageId, dispatch) => {
 	try{
 		imageId = imageId.replace("/image/", "")
@@ -166,7 +174,6 @@ export const searchImage = async (
 		return response.response
 		
 	} catch (e) {
-		alert(e.message)
 		return null
 	}
 }

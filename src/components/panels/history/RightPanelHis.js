@@ -39,7 +39,6 @@ function RightPanelHis({ setShowReviewHistory }) {
 	useEffect(() => {
 		if(user === {}) return null
 		try {
-			console.count('call search')
 			dispatch({ type: "RESET_USER_HISTORY" })
 			dispatch({ type: "RESET_SEARCH_PAGE" })
 			const getHistory = async () => {
@@ -50,7 +49,7 @@ function RightPanelHis({ setShowReviewHistory }) {
 
 			getHistory()
 		} catch (err) {
-			alert(`failed to user history deal to ${err}`)
+			alert(`failed to load user history deal to ${err}`)
 		}
 	}, [])
 
@@ -96,6 +95,7 @@ function RightPanelHis({ setShowReviewHistory }) {
 		}
 	}
 
+	//<!-- scroll to search next page -->
 	const handleScroll = async () => {
 		try{
 			var objDiv = document.querySelector(".history")

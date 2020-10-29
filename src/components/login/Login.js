@@ -32,6 +32,7 @@ function Login({ type, initialState }) {
 		})
 	}
 
+	//<!-- Check login session - Prevent direct to main page -->
 	useEffect(() => {
 		const user = localStorage.getItem("user")
 		const accessToken = localStorage.getItem("access_token")

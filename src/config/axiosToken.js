@@ -14,7 +14,7 @@ const axiosClient = axios.create({
 	paramsSerializer: (params) => queryString.stringify(params),
 })
 
-
+// <!-- middleware handle response -->
 axiosClient.interceptors.response.use(
 	(response) => {
 		if (response && response.data) {

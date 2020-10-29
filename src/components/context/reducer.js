@@ -22,7 +22,7 @@ export const initialState = {
 	nextSearchPage:1,
 	totalPages:null,
 }
-// "232f82d4-14e1-11eb-8109-0242ac140005.jpg"
+
 const reducer = (state, action) => {
 	switch (action.type) {
 		case "SET_USER":

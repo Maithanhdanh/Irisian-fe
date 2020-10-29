@@ -22,15 +22,6 @@ function DiseasePicker({ data, setData }) {
 
 	useEffect(() => {
 		setData({ ...data, disease: [...diseaseFilter] })
-		if (diseaseFilter === []) {
-			document
-				.querySelector("button.disease-filter-popup")
-				.classList.add("normal_disease")
-			return
-		}
-		document
-			.querySelector("button.disease-filter-popup")
-			.classList.add("selected_disease")
 	}, [diseaseFilter])
 
 	return (

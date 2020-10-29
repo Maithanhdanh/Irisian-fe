@@ -10,6 +10,7 @@ function NavBar() {
 	const location = useLocation().pathname
 	const [{}, dispatch] = useStateValue()
 
+	//<!-- add style after click icon -->
 	useEffect(() => {
 		if (location === "/") {
 			document
@@ -21,6 +22,7 @@ function NavBar() {
 				.classList.add("circle-icon")
 		}
 	}, [location])
+	
 	const handleLogout = async () => {
 		try {
 			await axiosClient({

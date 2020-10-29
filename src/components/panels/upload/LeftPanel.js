@@ -25,6 +25,7 @@ function LeftPanel({ type }) {
 	const [selectedImageInfo, setSelectedImageInfo] = useState([])
 	const [returnBar, setReturnBar] = useState([])
 
+	//<!-- render result bars -->
 	const resultBar = (findingsLength, findings = needShowFindings) => {
 		var NUM_BAR = createSequence(findingsLength)
 		setReturnBar(
@@ -49,6 +50,7 @@ function LeftPanel({ type }) {
 	}
 
 	useEffect(() => {
+		//<!-- Check rendered component role then trigger render result bars -->
 		if (type !== "review") {
 			if (!needShowFindings) return setReturnBar([])
 			resultBar(needShowFindings?.length)

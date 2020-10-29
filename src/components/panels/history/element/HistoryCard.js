@@ -27,6 +27,8 @@ function HistoryCard({ imageId, result, date, setShowReviewHistory }) {
 	const [info, setInfo] = useState(
 		needShowingInfo(result?.info ? result.info : {})
 	)
+
+	//<!-- filter findings -->
 	const [findings, setFindings] = useState(
 		needShowFinding(
 			addColors(sortObjectByValue(result?.findings ? result.findings : {}))
@@ -50,6 +52,7 @@ function HistoryCard({ imageId, result, date, setShowReviewHistory }) {
 			))
 		)
 	}
+
 	useEffect(() => {
 		if (!findings) return setReturnItems([])
 		resultBar(findings?.length)

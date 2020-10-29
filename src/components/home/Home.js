@@ -8,10 +8,10 @@ import RightPanel from "../panels/upload/RightPanel"
 
 function Home() {
 	const history = useHistory()
+	//<!-- Check login session - direct to login page -->
 	useEffect(() => {
 		if(history === undefined) return
 		const checkSession = async () => {
-			console.count('call TOKEN form home')
 			const token = await getAccessToken()
 
 			if(token == null) return history.push("/login")

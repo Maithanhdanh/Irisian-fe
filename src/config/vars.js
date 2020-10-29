@@ -2,7 +2,8 @@ import moment from "moment"
 if (process.env.REACT_ENV !== "production") {
 	require("dotenv").config()
 }
-
+// variable of all app
+// color of result bars
 export const COLOR_PROCESS_BAR = {
 	NORMAL: "green",
 	LOW: "blue",
