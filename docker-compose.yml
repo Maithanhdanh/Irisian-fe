@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  app:
+    stdin_open: true
+    container_name: react-docker
+    image: react-docker
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
